@@ -3,7 +3,6 @@
 // Let the plugin class delegate functionality to these classes
 Plugin.mathtext = {};
 
-/* istanbul ignore next */
 Plugin.mathtext.RendererPlugin = Plugin.extend({
   _type: 'org.ekstep.mathtext',
   _isContainer: false,
