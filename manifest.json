@@ -1,0 +1,51 @@
+{
+  "id": "org.ekstep.mathtext",
+  "ver": "1.0",
+  "author": "Swati",
+  "title": "Math Text Plugin",
+  "description": "Plugin to create Math Text",
+  "editor":
+  {
+    "main": "editor/plugin.js",
+    "dependencies": [
+    {
+      "type": "js",
+      "src": "editor/lib/mathquill/mathquill.min.js"
+    },
+    {
+      "type": "css",
+      "src": "editor/lib/mathquill/mathquill.css"
+    }],
+    "menu": [
+    {
+      "id": "math-text",
+      "category": "main",
+      "type": "icon",
+      "toolTip": "Add Math text",
+      "title": "Question Set",
+      "iconClass": "icon-questions icon",
+      "onclick":
+      {
+        "id": "org.ekstep.mathtext:showpopup"
+      }
+    }],
+    "init-data":
+    {},
+    "configManifest": [
+    {}],
+    "help":
+    {
+      "src": "editor/help.md",
+      "dataType": "text"
+    }
+  },
+  "renderer":
+  {
+    "main": "renderer/plugin.js",
+    "dependencies": []
+  },
+  "icon": "assets/icon.png",
+  "languages": ["English"],
+  "categories": [""],
+  "keywords": [""]
+}
