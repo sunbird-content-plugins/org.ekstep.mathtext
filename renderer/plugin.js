@@ -1,9 +1,9 @@
 // Renderer plugin can't be tested as of now
 // Please move the logic to other classes and test them independently
 // Let the plugin class delegate functionality to these classes
-Plugin.mathtext = {};
+org.ekstep.mathtext = {};
 
-Plugin.mathtext.RendererPlugin = Plugin.extend({
+org.ekstep.mathtext.RendererPlugin = Plugin.extend({
   _type: 'org.ekstep.mathtext',
   _isContainer: false,
   _render: true,
@@ -14,8 +14,7 @@ Plugin.mathtext.RendererPlugin = Plugin.extend({
       pluginData = JSON.parse(data.data.__cdata);
 
     var pid = data._id || data.id;
-
-    this.id = _.uniqueId('org.ekstep.mathtext');
+    
     this._data = data;
     var mathData = _.clone(this._data);
     mathData.id = pid;

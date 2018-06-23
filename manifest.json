@@ -8,17 +8,8 @@
   "editor":
   {
     "main": "editor/plugin.js",
-    "dependencies": [
-    {
-      "type": "js",
-      "src": "editor/init.js"
-    }],
-    "menu": [],
-    "help":
-    {
-      "src": "editor/help.md",
-      "dataType": "text"
-    }
+    "dependencies": [],
+    "menu": []
   },
   "renderer":
   {
