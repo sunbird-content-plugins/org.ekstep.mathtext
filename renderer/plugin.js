@@ -11,7 +11,7 @@ org.ekstep.mathtext.RendererPlugin = Plugin.extend({
     var pluginData;
 
     if (!_.isUndefined(data.data))
-      pluginData = JSON.parse(data.data.__cdata);
+      pluginData = JSON.parse(data.config.__cdata);
 
     var pid = data._id || data.id;
     
@@ -19,7 +19,7 @@ org.ekstep.mathtext.RendererPlugin = Plugin.extend({
     var mathData = _.clone(this._data);
     mathData.id = pid;
 
-    mathData.__text = _.isUndefined(pluginData.latex) ? mathData.__text : pluginData.latex;
+    mathData.__text = (_.isUndefined(pluginData) || _.isUndefined(pluginData.latex)) ? mathData.latex : pluginData.latex;
     var dims = this.relativeDims();
     var div = document.getElementById(data.id);
     if (div) {

@@ -1,0 +1,23 @@
+.symbols-div span {
+  margin: 1%;
+  width: 10%;
+}
+
+.ui.segment.math-tab {
+  border: none;
+  box-shadow: none;
+}
+
+.math-close-tab {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+.ui.modal>.actions.math-footer {
+  text-align: left;
+}
+
+.ui.modal.math-modal {
+  top: 15%;
+}
