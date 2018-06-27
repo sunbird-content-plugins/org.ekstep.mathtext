@@ -11,7 +11,7 @@
 .math-close-tab {
   position: absolute;
   right: 15px;
-  top: 10px;
+  top: 17px;
 }
 
 .ui.modal>.actions.math-footer {
@@ -20,4 +20,71 @@
 
 .ui.modal.math-modal {
   top: 15%;
+  width: 450px;
+  margin: 0 0 0 -14%;
+}
+
+.math-content {
+  min-height: 300px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+#latex{
+  display: none;
+}
+#math-field{
+  max-width: 100%;
+  min-width: 100%;
+  height: 35px;
+  padding: 2px 10px;
+}
+
+.ui.secondary.menu.math-tab-head{
+  background: rgba(0,0,0,.05);
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.ui.secondary.menu.math-tab-head .active.item{
+  color: #1c94d1!important;
+  background: initial;
+}
+
+.ui.secondary.menu.math-tab-head .item:hover,
+.ui.secondary.menu.math-tab-head .active.item:hover{
+  color: initial;
+  background: initial;
+}
+
+.meta .katex-display{
+  margin: 0;
+}
+
+.math-symbols{
+  text-align: center;
+}
+
+.math-symbol{
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.math-symbol:hover{ 
+  border: 1px solid rgba(0,0,0,.57);
+}
+
+.math-symbol:active{
+  color: #1c94d1;
+  background: rgba(0,0,0,.05);
+  border: none;
+}
+
+.math-latex-symbols{
+  padding: 0 10px 0 0;
+  font-weight: 800;
+}
+
+.ui.grid.math-latex{
+  margin-left: 30px;
 }

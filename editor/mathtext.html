@@ -1,47 +1,105 @@
-<script type="text/ng-template" id="mathTextBrowser" ng-controller="mathTextController as $ctrl">
-  <div class="ui modal mathTextModal active">
-    <div class="header" style="padding-right:1em;">
-      <div class="ui three column grid">
-        <div class="column center aligned">
-          <div class="ui huge breadcrumb breadcrumbTitle qb-breadcrumb">
-            <div class="section" ng-class="{activeBreadcumb: isMathWysiwyg == true}">WYSIWYG Editor
-            </div>
-            <i class="right chevron icon divider"></i>
-            <div class="section" ng-class="{activeBreadcumb: isMathWysiwyg == false}">Latex
+<script type="text/ng-template" id="mathTextBrowser" ng-controller="mathTextController">
+  <div class="ui modal math-modal active">
+    <div id="context1">
+      <div class="ui secondary menu math-tab-head">
+        <a class="item active" data-tab="library">Library</a>
+        <a class="item" data-tab="symbols">Symbols</a>
+        <a class="item" data-tab="equations">Equations</a>
+        <a class="item" data-tab="latex">Latex</a>
+        <i class="cursor-pointer close link icon math-close-tab" ng-click="closeThisDialog();"></i>
+      </div>
+      <div class="math-content">
+        <div class="ui tab segment active math-tab" data-tab="library">
+          <div class="ui large divided items">
+            <div class="item select list-items" ng-repeat="lib in libraryEquations" ng-click="latexToEquations(lib.latex)">
+              <div class="middle aligned content">
+                <div class="header">{{lib.title}}</div>
+                <div class="meta" id="libFormula{{$index}}" ng-bind="latexToFormula('libFormula{{$index}}',lib.latex)"></div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="column right aligned">
-          <i class="cursor-pointer close link icon" ng-click="closeThisDialog();$ctrl.generateTelemetry({type: 'click', subtype: 'close', target: 'closeButton'})"></i>
+        <div class="ui tab segment math-tab" data-tab="symbols">
+          <div class="ui right aligned grid">
+            <div class="right floated right aligned six wide column">
+              <div class="ui dropdown item right">
+                Symbols
+                <i class="dropdown icon"></i>
+                <div class="right menu">
+                  <a class="item">All</a>
+                  <a class="item">alpha</a>
+                  <a class="item">beta</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui grid">
+            <div class="two wide column math-symbols" ng-repeat="symbol in symbolsArray">
+              <span class="math-symbol" id="symbol{{$index}}" ng-click="latexToEquations(symbol.latex);">{{symbol.symbol}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="ui tab segment math-tab" data-tab="equations">
+          <div class="ui right aligned grid">
+            <div class="left aligned six wide column">
+              Fractions
+            </div>
+            <div class="right floated right aligned six wide column">
+              <div class="ui dropdown item">
+                Fractions
+                <i class="dropdown icon"></i>
+                <div class="right menu">
+                  <a class="item">All</a>
+                  <a class="item">Fractions</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui tab segment math-tab" data-tab="latex">
+
+          <div class="ui three column grid math-latex">
+            <div class="column" ng-click="latexToEquations('\\sqrt{}')">
+              <span class="math-latex-symbols">√</span>
+              <span>\\sqrt{}</span>
+            </div>
+            <div class="column" ng-click="latexToEquations('\\sqrt{}')">
+              <span class="math-latex-symbols">√</span>
+              <span>\\sqrt{}</span>
+            </div>
+            <div class="column" ng-click="latexToEquations('\\sqrt{}')">
+              <span class="math-latex-symbols">√</span>
+              <span>\\sqrt{}</span>
+            </div>
+            <div class="column" ng-click="latexToEquations('\\sqrt{}')">
+              <span class="math-latex-symbols">√</span>
+              <span>\\sqrt{}</span>
+            </div>
+          </div>
+
+         <!--  <div class="content wizard">
+            <div class="math-formula" ng-show="isMathWysiwyg">
+              <div class="symbols-div">
+                <button ng-click="latexToEquations('\\sqrt{}')"></button>
+              </div>
+            </div>
+          </div> -->
         </div>
       </div>
     </div>
-    <div class="content wizard">
-      <div class="math-formula" ng-show="isMathWysiwyg">
-        <div class="symbols-div"><button ng-click="insertSqurt()">√</button></div>
-        <p>Type math here: <span id="math-field"></span></p>
-        
-      </div>
-      <div class="math-formula" ng-show="!isMathWysiwyg">
-        <p>LaTeX of what you typed: <span id="latex"></span></p>
-        <!-- <span id="hiddenSpan" ></span> -->
-      </div>
-      <!-- <span class="math-field"> -->
-      <!-- <input name="title" ng-model="mathText" type="text" placeholder="Question Set Title" ng-change="mathQuillConvert(mathText)"> -->
-      <!-- </span> -->
-      <!-- <p><span id="mathTextBox" class="mathquill-editor">\sqrt[3]{8}=\frac{\sqrt{16}}{2}</span></p> -->
-      
-    </div>
-    <div class="actions button-actions qs-footer-action">
-      <div class="ui buttons">
-        <button class="ui blue button" ng-click="mathQuillToLatex()" type="button" ng-show="isMathWysiwyg">Convert to latex
-        </button>
-        <!-- <button class="ui blue button" ng-click="LatexTomathQuill()" type="button">Convert to Formula
-        </button> -->
-        <button class="ui blue button" ng-click="addToStage()" type="button" ng-show="!isMathWysiwyg">Add to stage
-        </button>
+    <div class="actions math-footer">
+      <div class="ui two column grid">
+        <div class="ui nine wide column math-formula">
+          <span id="math-field"></span>
+          <span id="latex"></span>
+        </div>
+        <div class="ui three wide column right aligned">
+          <button class="ui basic primary button" ng-click="addToStage()" type="button">Add
+          </button>
+        </div>
       </div>
     </div>
-    <!-- <mathquill ng-model="mlatex" /> -->
+  </div>
+  <!-- <mathquill ng-model="mlatex" /> -->
   </div>
 </script>

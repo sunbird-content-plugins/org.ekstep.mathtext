@@ -1,6 +1,6 @@
 /*
- * Plugin to create mathText
- * @class org.ekstep.mathText.MathTextController
+ * Plugin to create mathtext
+ * @class org.ekstep.mathtext.mathTextController
  * @author Swati Singh <swati.singh@tarento.com>
  */
 angular.module('org.ekstep.mathtext', [])
@@ -9,50 +9,159 @@ angular.module('org.ekstep.mathtext', [])
     // var MQ = MathQuill.getInterface(2);
     var mathField, latex, latexSpan, hiddenSpanArea;
     $scope.isMathWysiwyg = true;
+    $scope.libraryEquations = [{
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      },
+      {
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      },
+      {
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      },
+      {
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      },
+      {
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      }
+    ];
 
-
+    $scope.symbols = [{
+        "symbol": "β",
+        "latex": "\\beta",
+        "type": "beta"
+      },
+      {
+        "symbol": "β",
+        "latex": "\\beta",
+        "type": "beta"
+      },
+      {
+        "symbol": "β",
+        "latex": "\\beta",
+        "type": "beta"
+      },
+      {
+        "symbol": "β",
+        "latex": "\\beta",
+        "type": "beta"
+      }, {
+        "symbol": "β",
+        "latex": "\\beta",
+        "type": "beta"
+      },
+      {
+        "symbol": "β",
+        "latex": "\\beta",
+        "type": "beta"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      }
+    ];
     var MQ = MathQuill.getInterface(2); // for backcompat
+    $scope.symbolsArray = $scope.symbols;
+    $timeout(function() {
+      $('.menu .item').tab();
+      $('.ui.dropdown').dropdown({
+        onChange: function(val) {
+          if (val != "all") {
+            $scope.symbolsArray = [];
+            _.each($scope.symbols, function(value, key) {
+              if (value.type == val) {
+                $scope.symbolsArray.push(value);
+              }
+            })
+          } else {
+            $scope.symbolsArray = $scope.symbols;
+          }
+          console.log($scope.symbolsArray);
+          $scope.$safeApply();
+        }
+      });
+    }, 1000);
 
     $timeout(function() {
       var mathFieldSpan = document.getElementById('math-field');
       latexSpan = document.getElementById('latex');
       hiddenSpanArea = document.getElementById('hiddenSpan');
-      mathField = MQ.MathField(mathFieldSpan);
+      mathField = MQ.MathField(mathFieldSpan, {
+        spaceBehavesLikeTab: true,
+        handlers: {
+          edit: function() {
+            latexSpan.textContent = mathField.latex();
+          }
+        }
+      });
 
     }, 1000);
 
-
-    $scope.insertSqurt = function() {
-      mathField.write('\\sqrt{}');
+    $scope.latexToEquations = function(latex) {
+      mathField.write(latex);
     }
 
-
-    $scope.mathQuillConvert = function(text) {
-
+    $scope.latexToFormula = function(id, latex) {
+      var mathDiv = document.getElementById(id);
+      katex.render(latex, mathDiv, { displayMode: true }); // eslint-disable-line no-undef
     }
 
-    $scope.mathQuillToLatex = function(equation) {
-      // logic to convert mathquill text to latex format.
-
-      latexSpan.textContent = mathField.latex();
-     // hiddenSpanArea.textContent = mathField.latex();
-      $scope.isMathWysiwyg = false;
-
-    }
-    $scope.LatexTomathQuill = function(latex) {
-
-      // logic to convert mathquill text to latex format.
-      $scope.isMathWysiwyg = true;
-    }
     $scope.addToStage = function() {
       // Convert the latex or mathquill to equation 
       // add it to the stage
-      //var text1 = mathField.el().innerHTML;
       $(".mq-textarea").remove();
-      var text1= mathField.el().innerHTML;
       var equation = document.getElementById('latex').innerHTML;
-      // var myText = text1.value;
-      //instance.createTransliteratedText(text1);
       ecEditor.dispatchEvent('org.ekstep.mathtext:create', {
         "latex": equation,
         "type": "rect",
@@ -65,4 +174,4 @@ angular.module('org.ekstep.mathtext', [])
     }
   }])
 
-//# sourceURL=math-text-editor.js
+//# sourceURL=mathText.js
