@@ -7,119 +7,117 @@ angular.module('org.ekstep.mathtext', [])
   .controller('mathTextController', ['$scope', 'instance', '$timeout', function($scope, instance, $timeout) {
 
     // var MQ = MathQuill.getInterface(2);
-    var mathField, latex, latexSpan, hiddenSpanArea;
-    $scope.isMathWysiwyg = true;
+    var mathField, latexSpan;
     $scope.libraryEquations = [{
-        "title": "Area of circle",
-        "latex": "A = \\pi r^2"
-      },
-      {
-        "title": "Area of circle",
-        "latex": "A = \\pi r^2"
-      },
-      {
-        "title": "Area of circle",
-        "latex": "A = \\pi r^2"
-      },
-      {
-        "title": "Area of circle",
-        "latex": "A = \\pi r^2"
-      },
-      {
-        "title": "Area of circle",
-        "latex": "A = \\pi r^2"
-      }
-    ];
+      "title": "Area of circle",
+      "latex": "A = \\pi r^2"
+    },
+    {
+      "title": "Area of circle",
+      "latex": "A = \\pi r^2"
+    },
+    {
+      "title": "Area of circle",
+      "latex": "A = \\pi r^2"
+    },
+    {
+      "title": "Area of circle",
+      "latex": "A = \\pi r^2"
+    },
+    {
+      "title": "Area of circle",
+      "latex": "A = \\pi r^2"
+    }];
 
     $scope.symbols = [{
-        "symbol": "β",
-        "latex": "\\beta",
-        "type": "beta"
-      },
-      {
-        "symbol": "β",
-        "latex": "\\beta",
-        "type": "beta"
-      },
-      {
-        "symbol": "β",
-        "latex": "\\beta",
-        "type": "beta"
-      },
-      {
-        "symbol": "β",
-        "latex": "\\beta",
-        "type": "beta"
-      }, {
-        "symbol": "β",
-        "latex": "\\beta",
-        "type": "beta"
-      },
-      {
-        "symbol": "β",
-        "latex": "\\beta",
-        "type": "beta"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      }
-    ];
-    var MQ = MathQuill.getInterface(2); // for backcompat
+      "symbol": "β",
+      "latex": "\\beta",
+      "type": "beta"
+    },
+    {
+      "symbol": "β",
+      "latex": "\\beta",
+      "type": "beta"
+    },
+    {
+      "symbol": "α",
+      "latex": "\\alpha",
+      "type": "alpha"
+    }];
+
+    $scope.equations = [{
+      "equation": "β",
+      "latex": "\\beta",
+      "type": "fractions"
+    },
+    {
+      "equation": "β",
+      "latex": "\\beta",
+      "type": "fractions"
+    },
+    {
+      "equation": "α",
+      "latex": "\\alpha",
+      "type": "fractions"
+    }];
+
+    $scope.latexes = [{
+      "text": "β",
+      "latex": "\\beta",
+      "type": "latex"
+    },
+    {
+      "text": "β",
+      "latex": "\\beta",
+      "type": "latex"
+    },
+    {
+      "text": "α",
+      "latex": "\\alpha",
+      "type": "latex"
+    }];
+
+    var MQ = MathQuill.getInterface(2); // eslint-disable-line no-undef
     $scope.symbolsArray = $scope.symbols;
+    $scope.equationsArray = $scope.equations;
+    $scope.latexArray = $scope.latexes;
     $timeout(function() {
       $('.menu .item').tab();
-      $('.ui.dropdown').dropdown({
+      $('.ui.dropdown.latex-dropdown').dropdown({
+        onChange: function(val) {
+          if (val != "all") {
+            $scope.latexArray = [];
+            _.each($scope.latexes, function(value, key) { // eslint-disable-line no-unused-vars
+              if (value.type == val) {
+                $scope.latexArray.push(value);
+              }
+            })
+          } else {
+            $scope.latexArray = $scope.latexes;
+          }
+          $scope.$safeApply();
+        }
+      });
+      $('.ui.dropdown.equations-dropdown').dropdown({
+        onChange: function(val) {
+          if (val != "all") {
+            $scope.equationsArray = [];
+            _.each($scope.equations, function(value, key) { // eslint-disable-line no-unused-vars
+              if (value.type == val) {
+                $scope.equationsArray.push(value);
+              }
+            })
+          } else {
+            $scope.equationsArray = $scope.equations;
+          }
+          $scope.$safeApply();
+        }
+      });
+      $('.ui.dropdown.symbols-dropdown').dropdown({
         onChange: function(val) {
           if (val != "all") {
             $scope.symbolsArray = [];
-            _.each($scope.symbols, function(value, key) {
+            _.each($scope.symbols, function(value, key) { // eslint-disable-line no-unused-vars
               if (value.type == val) {
                 $scope.symbolsArray.push(value);
               }
@@ -127,7 +125,6 @@ angular.module('org.ekstep.mathtext', [])
           } else {
             $scope.symbolsArray = $scope.symbols;
           }
-          console.log($scope.symbolsArray);
           $scope.$safeApply();
         }
       });
@@ -136,7 +133,6 @@ angular.module('org.ekstep.mathtext', [])
     $timeout(function() {
       var mathFieldSpan = document.getElementById('math-field');
       latexSpan = document.getElementById('latex');
-      hiddenSpanArea = document.getElementById('hiddenSpan');
       mathField = MQ.MathField(mathFieldSpan, {
         spaceBehavesLikeTab: true,
         handlers: {
@@ -158,7 +154,7 @@ angular.module('org.ekstep.mathtext', [])
     }
 
     $scope.addToStage = function() {
-      // Convert the latex or mathquill to equation 
+      // Convert the latex or mathquill to equation
       // add it to the stage
       $(".mq-textarea").remove();
       var equation = document.getElementById('latex').innerHTML;

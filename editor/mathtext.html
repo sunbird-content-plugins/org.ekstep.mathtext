@@ -13,8 +13,8 @@
           <div class="ui large divided items">
             <div class="item select list-items" ng-repeat="lib in libraryEquations" ng-click="latexToEquations(lib.latex)">
               <div class="middle aligned content">
-                <div class="header">{{lib.title}}</div>
-                <div class="meta" id="libFormula{{$index}}" ng-bind="latexToFormula('libFormula{{$index}}',lib.latex)"></div>
+                <div class="math-lib-header">{{lib.title}}</div>
+                <div class="meta math-lib-meta" id="libFormula{{$index}}" ng-bind="latexToFormula('libFormula{{$index}}',lib.latex)"></div>
               </div>
             </div>
           </div>
@@ -22,7 +22,7 @@
         <div class="ui tab segment math-tab" data-tab="symbols">
           <div class="ui right aligned grid">
             <div class="right floated right aligned six wide column">
-              <div class="ui dropdown item right">
+              <div class="ui dropdown symbols-dropdown item right">
                 Symbols
                 <i class="dropdown icon"></i>
                 <div class="right menu">
@@ -45,7 +45,7 @@
               Fractions
             </div>
             <div class="right floated right aligned six wide column">
-              <div class="ui dropdown item">
+              <div class="ui dropdown equations-dropdown item">
                 Fractions
                 <i class="dropdown icon"></i>
                 <div class="right menu">
@@ -55,35 +55,31 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="ui tab segment math-tab" data-tab="latex">
-
-          <div class="ui three column grid math-latex">
-            <div class="column" ng-click="latexToEquations('\\sqrt{}')">
-              <span class="math-latex-symbols">√</span>
-              <span>\\sqrt{}</span>
-            </div>
-            <div class="column" ng-click="latexToEquations('\\sqrt{}')">
-              <span class="math-latex-symbols">√</span>
-              <span>\\sqrt{}</span>
-            </div>
-            <div class="column" ng-click="latexToEquations('\\sqrt{}')">
-              <span class="math-latex-symbols">√</span>
-              <span>\\sqrt{}</span>
-            </div>
-            <div class="column" ng-click="latexToEquations('\\sqrt{}')">
-              <span class="math-latex-symbols">√</span>
-              <span>\\sqrt{}</span>
+          <div class="ui grid">
+            <div class="two wide column math-symbols" ng-repeat="equation in equationsArray">
+              <span class="math-symbol" id="equation{{$index}}" ng-click="latexToEquations(equation.latex);">{{equation.equation}}</span>
             </div>
           </div>
-
-         <!--  <div class="content wizard">
-            <div class="math-formula" ng-show="isMathWysiwyg">
-              <div class="symbols-div">
-                <button ng-click="latexToEquations('\\sqrt{}')"></button>
+        </div>
+        <div class="ui tab segment math-tab" data-tab="latex">
+          <div class="ui right aligned grid">
+            <div class="right floated right aligned six wide column">
+              <div class="ui dropdown latex-dropdown item right">
+                Latex
+                <i class="dropdown icon"></i>
+                <div class="right menu">
+                  <a class="item">All</a>
+                  <a class="item">latex</a>
+                </div>
               </div>
             </div>
-          </div> -->
+          </div>
+          <div class="ui three column grid math-latex">
+            <div class="column" ng-repeat="latex in latexes" ng-click="latexToEquations(latex.latex);">
+              <span class="math-latex-symbols" id="latex{{$index}}">{{latex.text}}</span>
+              <span>{{latex.latex}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
