@@ -71,14 +71,21 @@
   cursor: pointer;
 }
 
-.math-symbol:hover {
+.math-symbol,
+.math-latex-div{
+  border: 1px solid #fff;
+}
+
+.math-symbol:hover,
+.math-latex-div:hover {
   border: 1px solid rgba(0, 0, 0, .57);
 }
 
-.math-symbol:active {
+.math-symbol:active,
+.math-latex-div:active {
   color: #1c94d1;
   background: rgba(0, 0, 0, .05);
-  border: none;
+  border: 1px solid #fff;
 }
 
 .math-latex-symbols {
@@ -87,7 +94,7 @@
 }
 
 .ui.grid.math-latex {
-  margin-left: 30px;
+  margin-left: 10px;
 }
 
 .math-lib-header {
@@ -105,4 +112,9 @@
   text-align: left;
   font-weight: 600;
   color: rgba(0, 0, 0, .87);
+}
+
+.math-lib,
+.math-latex-div{
+  cursor: pointer;
 }

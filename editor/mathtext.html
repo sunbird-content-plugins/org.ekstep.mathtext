@@ -11,7 +11,7 @@
       <div class="math-content">
         <div class="ui tab segment active math-tab" data-tab="library">
           <div class="ui large divided items">
-            <div class="item select list-items" ng-repeat="lib in libraryEquations" ng-click="latexToEquations(lib.latex)">
+            <div class="item select list-items math-lib" ng-repeat="lib in libraryEquations" ng-click="latexToEquations(lib.latex)">
               <div class="middle aligned content">
                 <div class="math-lib-header">{{lib.title}}</div>
                 <div class="meta math-lib-meta" id="libFormula{{$index}}" ng-bind="latexToFormula('libFormula{{$index}}',lib.latex)"></div>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="ui three column grid math-latex">
-            <div class="column" ng-repeat="latex in latexes" ng-click="latexToEquations(latex.latex);">
+            <div class="column math-latex-div" ng-repeat="latex in latexes" ng-click="latexToEquations(latex.latex);">
               <span class="math-latex-symbols" id="latex{{$index}}">{{latex.text}}</span>
               <span>{{latex.latex}}</span>
             </div>

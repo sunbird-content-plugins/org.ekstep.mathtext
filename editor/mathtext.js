@@ -5,82 +5,99 @@
  */
 angular.module('org.ekstep.mathtext', [])
   .controller('mathTextController', ['$scope', 'instance', '$timeout', function($scope, instance, $timeout) {
-
     // var MQ = MathQuill.getInterface(2);
     var mathField, latexSpan;
     $scope.libraryEquations = [{
-      "title": "Area of circle",
-      "latex": "A = \\pi r^2"
-    },
-    {
-      "title": "Area of circle",
-      "latex": "A = \\pi r^2"
-    },
-    {
-      "title": "Area of circle",
-      "latex": "A = \\pi r^2"
-    },
-    {
-      "title": "Area of circle",
-      "latex": "A = \\pi r^2"
-    },
-    {
-      "title": "Area of circle",
-      "latex": "A = \\pi r^2"
-    }];
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      },
+      {
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      },
+      {
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      },
+      {
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      },
+      {
+        "title": "Area of circle",
+        "latex": "A = \\pi r^2"
+      }
+    ];
 
     $scope.symbols = [{
-      "symbol": "β",
-      "latex": "\\beta",
-      "type": "beta"
-    },
-    {
-      "symbol": "β",
-      "latex": "\\beta",
-      "type": "beta"
-    },
-    {
-      "symbol": "α",
-      "latex": "\\alpha",
-      "type": "alpha"
-    }];
+        "symbol": "β",
+        "latex": "\\beta",
+        "type": "beta"
+      },
+      {
+        "symbol": "β",
+        "latex": "\\beta",
+        "type": "beta"
+      },
+      {
+        "symbol": "α",
+        "latex": "\\alpha",
+        "type": "alpha"
+      }
+    ];
 
     $scope.equations = [{
-      "equation": "β",
-      "latex": "\\beta",
-      "type": "fractions"
-    },
-    {
-      "equation": "β",
-      "latex": "\\beta",
-      "type": "fractions"
-    },
-    {
-      "equation": "α",
-      "latex": "\\alpha",
-      "type": "fractions"
-    }];
+        "equation": "β",
+        "latex": "\\beta",
+        "type": "fractions"
+      },
+      {
+        "equation": "β",
+        "latex": "\\beta",
+        "type": "fractions"
+      },
+      {
+        "equation": "α",
+        "latex": "\\alpha",
+        "type": "fractions"
+      }
+    ];
 
     $scope.latexes = [{
-      "text": "β",
-      "latex": "\\beta",
-      "type": "latex"
-    },
-    {
-      "text": "β",
-      "latex": "\\beta",
-      "type": "latex"
-    },
-    {
-      "text": "α",
-      "latex": "\\alpha",
-      "type": "latex"
-    }];
+        "text": "β",
+        "latex": "\\beta",
+        "type": "latex"
+      },
+      {
+        "text": "β",
+        "latex": "\\beta",
+        "type": "latex"
+      },
+      {
+        "text": "α",
+        "latex": "\\alpha",
+        "type": "latex"
+      }
+    ];
 
     var MQ = MathQuill.getInterface(2); // eslint-disable-line no-undef
     $scope.symbolsArray = $scope.symbols;
     $scope.equationsArray = $scope.equations;
     $scope.latexArray = $scope.latexes;
+
+    $scope.$on('ngDialog.opened', function(e, $dialog) {
+      var mathTextElement = document.getElementsByClassName('mathtextEditor_1');
+      mathTextElement = mathTextElement[0];
+      $scope.selectedText = false;
+      var textObj = ecEditor.getCurrentObject();
+      if (e.currentScope.ngDialogData && e.currentScope.ngDialogData.textSelected && textObj) {
+        $scope.selectedText = true;
+        $timeout(function() {
+        $scope.latexToEquations(textObj.config.latex);
+      },500);
+      }
+    });
+
     $timeout(function() {
       $('.menu .item').tab();
       $('.ui.dropdown.latex-dropdown').dropdown({
@@ -142,7 +159,7 @@ angular.module('org.ekstep.mathtext', [])
         }
       });
 
-    }, 1000);
+    }, 300);
 
     $scope.latexToEquations = function(latex) {
       mathField.write(latex);
@@ -156,16 +173,24 @@ angular.module('org.ekstep.mathtext', [])
     $scope.addToStage = function() {
       // Convert the latex or mathquill to equation
       // add it to the stage
-      $(".mq-textarea").remove();
-      var equation = document.getElementById('latex').innerHTML;
-      ecEditor.dispatchEvent('org.ekstep.mathtext:create', {
-        "latex": equation,
-        "type": "rect",
-        "x": 10,
-        "y": 20,
-        "fill": "rgba(0, 0, 0, 0)",
-        "opacity": 1
-      });
+      var textObj = ecEditor.getCurrentObject();
+      if (textObj && $scope.selectedText) {
+        textObj.config.latex = document.getElementById('latex').innerHTML;
+        textObj.attributes.latex = textObj.config.latex;
+        this.latexToFormula(textObj.id, textObj.config.latex);
+      } else {
+        $(".mq-textarea").remove();
+        var equation = document.getElementById('latex').innerHTML;
+        ecEditor.dispatchEvent('org.ekstep.mathtext:create', {
+          "latex": equation,
+          "type": "rect",
+          "x": 10,
+          "y": 20,
+          "fill": "rgba(0, 0, 0, 0)",
+          "opacity": 1
+        });
+      }
+      org.ekstep.contenteditor.api.dispatchEvent('object:modified');
       $scope.closeThisDialog();
     }
   }])
