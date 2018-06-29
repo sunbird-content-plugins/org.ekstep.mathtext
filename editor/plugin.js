@@ -125,6 +125,9 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     richtextDiv.empty();
   },
 
+  removed: function(instance, options, event) {
+    ecEditor.jQuery("div#" + instance.id).remove();
+  },
 
   addDivElement: function(event, instance) {
     if (!(_.isUndefined(instance.data))) {
