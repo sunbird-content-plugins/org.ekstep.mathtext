@@ -110,7 +110,6 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     },
 
     removed: function(instance, options, event) {
-      debugger;
         ecEditor.jQuery("div#" + instance.id).remove();
     },
 

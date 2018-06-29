@@ -21,6 +21,10 @@
       "type": "js",
       "src": "editor/lib/katex/katex.min.js"
     },
+     {
+        "type": "js",
+        "src": "editor/mathtext.js"
+      },
     {
       "type": "css",
       "src": "editor/lib/katex/katex.min.css"
@@ -33,10 +37,10 @@
     {
       "id": "math-text",
       "category": "main",
-      "type": "icon",
+      "type": "image",
       "toolTip": "Add Math text",
       "title": "Question Set",
-      "iconClass": "icon-questions icon",
+      "iconImage": "assets/sigma.svg",
       "onclick":
       {
         "id": "org.ekstep.mathtext:showpopup"
