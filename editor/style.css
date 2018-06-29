@@ -30,61 +30,91 @@
   overflow-y: scroll;
 }
 
-#latex{
+#latex {
   display: none;
 }
-#math-field{
+
+#math-field {
   max-width: 100%;
   min-width: 100%;
   height: 35px;
   padding: 2px 10px;
 }
 
-.ui.secondary.menu.math-tab-head{
-  background: rgba(0,0,0,.05);
+.ui.secondary.menu.math-tab-head {
+  background: rgba(0, 0, 0, .05);
   padding: 10px;
   margin-bottom: 0;
 }
 
-.ui.secondary.menu.math-tab-head .active.item{
+.ui.secondary.menu.math-tab-head .active.item {
   color: #1c94d1!important;
   background: initial;
 }
 
 .ui.secondary.menu.math-tab-head .item:hover,
-.ui.secondary.menu.math-tab-head .active.item:hover{
+.ui.secondary.menu.math-tab-head .active.item:hover {
   color: initial;
   background: initial;
 }
 
-.meta .katex-display{
+.meta .katex-display {
   margin: 0;
 }
 
-.math-symbols{
+.math-symbols {
   text-align: center;
 }
 
-.math-symbol{
+.math-symbol {
   padding: 5px 10px;
   cursor: pointer;
 }
 
-.math-symbol:hover{ 
-  border: 1px solid rgba(0,0,0,.57);
+.math-symbol,
+.math-latex-div{
+  border: 1px solid #fff;
 }
 
-.math-symbol:active{
+.math-symbol:hover,
+.math-latex-div:hover {
+  border: 1px solid rgba(0, 0, 0, .57);
+}
+
+.math-symbol:active,
+.math-latex-div:active {
   color: #1c94d1;
-  background: rgba(0,0,0,.05);
-  border: none;
+  background: rgba(0, 0, 0, .05);
+  border: 1px solid #fff;
 }
 
-.math-latex-symbols{
+.math-latex-symbols {
   padding: 0 10px 0 0;
   font-weight: 800;
 }
 
-.ui.grid.math-latex{
-  margin-left: 30px;
+.ui.grid.math-latex {
+  margin-left: 10px;
+}
+
+.math-lib-header {
+  color: rgba(0, 0, 0, .6);
+  font-size: 1.2em;
+  padding: 5px 10px;
+}
+
+.ui.items>.item .meta.math-lib-meta {
+  margin: 10px 20px 0;
+  font-weight: 800;
+}
+
+.meta .katex-html {
+  text-align: left;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .87);
+}
+
+.math-lib,
+.math-latex-div{
+  cursor: pointer;
 }

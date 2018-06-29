@@ -14,7 +14,6 @@ org.ekstep.mathtext.RendererPlugin = Plugin.extend({
       pluginData = JSON.parse(data.config.__cdata);
 
     var pid = data._id || data.id;
-    
     this._data = data;
     var mathData = _.clone(this._data);
     mathData.id = pid;
