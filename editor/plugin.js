@@ -17,6 +17,7 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
   initialize: function() {
     var instance = this;
     ecEditor.addEventListener("org.ekstep.mathtext:showpopup", this.loadHtml, this);
+    ecEditor.addEventListener("org.ekstep.mathtext:changeConfig", this.onConfigChange, this);
     var templatePath = ecEditor.resolvePluginResource(instance.manifest.id, instance.manifest.ver, 'editor/mathtext.html');
     var controllerPath = ecEditor.resolvePluginResource(instance.manifest.id, instance.manifest.ver, 'editor/mathtext.js');
     ecEditor.getService(ServiceConstants.POPUP_SERVICE).loadNgModules(templatePath, controllerPath);
@@ -66,6 +67,32 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     this.editorObj.visible = true;
     if (this.editorObj) this.editorObj.setFill(props.fill);
     instance.addDivElement({}, instance);
+  },
+
+  onConfigChange : function(event, obj){
+      var elem = ecEditor.getCurrentObject();
+      var div = ecEditor.jQuery("div#" + elem.id);
+    
+      if (obj.configData) {
+        if (obj.configData.fontsize) {
+          elem.editorObj.fontSize = obj.configData.fontsize;
+          elem.attributes.fontsize = obj.configData.fontsize;
+          div.css('fontSize', obj.configData.fontsize + 'px');
+          div.css('width', "auto");
+          div.css('height', "auto");
+          var width = div.width();
+          var height = div.height();
+          elem.editorObj.width = width;
+          elem.attributes.w = width;
+          elem.editorObj.height = height;
+          elem.attributes.h = height;
+          div.css('width', width);
+          div.css('height', height);
+        }
+      }
+      ecEditor.render();
+      // ecEditor.dispatchEvent("org.ekstep.mathtext:adddiv", { data: elem });
+
   },
 
   /**
@@ -137,11 +164,17 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     var div = document.createElement('div');
     div.setAttribute("id", instance.id);
     div.style.position = 'absolute';
-    div.style.fontSize = '14px';
+    if(instance.editorObj.fontSize){
+      div.style.fontSize = instance.editorObj.fontSize + 'px';
+    }
+   
     div.style.fontFamily = 'NotoSans';
     div.style.width = instance.editorObj.width ? instance.editorObj.width + 1 + 'px' : "auto";
     div.style.height = instance.editorObj.height ? instance.editorObj.height + 1 + 'px' : "auto";
     div.style.pointerEvents = "none";
+    if(ecEditor.jQuery("div#" + instance.id)){
+      ecEditor.jQuery("div#" + instance.id).remove();
+    }
     ecEditor.jQuery(".canvas-container #" + this.mathTextId).append(div);
     ecEditor.jQuery("#" + instance.id).offset({ 'top': instance.editorObj.top + canvasCord.top, 'left': Number(parseInt(ecEditor.jQuery(".canvas-container").css('margin-left'))) + (instance.editorObj.left + canvasCord.left) });
     this.latexToEquation(instance.config.latex, div.id);
