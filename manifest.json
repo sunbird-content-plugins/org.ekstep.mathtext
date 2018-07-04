@@ -48,8 +48,12 @@
     }],
     "init-data":
     {},
-    "configManifest": [
-    {}],
+     "configManifest": [
+        {
+            "type": "custom_template",
+            "controllerURL": "editor/config-controller.js",
+            "templateURL": "editor/configTemplate.html"
+        }],
     "help":
     {
       "src": "editor/help.md",
