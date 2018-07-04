@@ -27,8 +27,7 @@
                 <i class="dropdown icon"></i>
                 <div class="right menu">
                   <a class="item">All</a>
-                  <a class="item">alpha</a>
-                  <a class="item">beta</a>
+                  <a class="item" ng-repeat="symbol in symbolType">{{symbol.type}}</a>
                 </div>
               </div>
             </div>
@@ -65,7 +64,7 @@
           <div class="ui right aligned grid">
             <div class="right floated right aligned six wide column">
               <div class="ui dropdown latex-dropdown item right">
-                Latex
+                LaTex
                 <i class="dropdown icon"></i>
                 <div class="right menu">
                   <a class="item">All</a>
@@ -89,8 +88,8 @@
           <span id="math-field"></span>
           <span id="latex"></span>
         </div>
-        <div class="ui three wide column right aligned">
-          <button class="ui basic primary button" ng-click="addToStage()" type="button">Add
+        <div class="ui three wide column right aligned math-add-button-div">
+          <button class="ui basic primary button math-add-button" ng-click="addToStage()" type="button">Add
           </button>
         </div>
       </div>
