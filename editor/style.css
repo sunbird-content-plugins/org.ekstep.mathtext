@@ -28,6 +28,7 @@
   min-height: 300px;
   height: 300px;
   overflow-y: scroll;
+  font-family: noto;
 }
 
 #latex {
