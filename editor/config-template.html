@@ -10,7 +10,7 @@
       </div> -->
         <div class="inline fields">
           <label>Font Size</label>
-          <select class="ui dropdown font-size-dropdown custom-dropdown" ng-model="configData['fontSize']" ng-options="val for val in fontSize" ng-change="fireSidebarTelemetry({id: 'fontSize'}, 'inputSelect');changeConfig();  ">
+          <select class="ui dropdown font-size-dropdown custom-dropdown" ng-model="configData['fontsize']" ng-options="val for val in fontSize" ng-change="fireSidebarTelemetry({id: 'fontSize'}, 'inputSelect');changeConfig();  ">
           </select>
           <!--  <div class="ui mini icon buttons bold-italic-buttons-group">
             <button class="ui button {{configData[dd.propertyName] ? 'active-button': ''}}" ng-repeat="dd in fontGroupConfig.config" ng-click=" configData[dd.propertyName] = !configData[dd.propertyName]; fireSidebarTelemetry({id: config.propertyName}, config.dataType);changeConfig()" data-tooltip="{{dd.toolTip}}">
