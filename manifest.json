@@ -52,7 +52,7 @@
         {
             "type": "custom_template",
             "controllerURL": "editor/config-controller.js",
-            "templateURL": "editor/configTemplate.html"
+            "templateURL": "editor/config-template.html"
         }],
     "help":
     {
