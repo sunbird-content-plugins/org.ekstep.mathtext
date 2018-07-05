@@ -61,7 +61,7 @@ angular.module('org.ekstep.mathtext', [])
         "symbol": "δ",
         "latex": "\\delta",
         "type": "Greek and Hebrew letters"
-      },{
+      }, {
         "symbol": "",
         "latex": "\\epsilon",
         "type": "Greek and Hebrew letters"
@@ -120,7 +120,7 @@ angular.module('org.ekstep.mathtext', [])
         "symbol": "π",
         "latex": "\\pi",
         "type": "Greek and Hebrew letters"
-      },{
+      }, {
         "symbol": "α",
         "latex": "\\psi",
         "type": "Greek and Hebrew letters"
@@ -134,7 +134,7 @@ angular.module('org.ekstep.mathtext', [])
         "symbol": "σ",
         "latex": "\\sigma",
         "type": "Greek and Hebrew letters"
-      },{
+      }, {
         "symbol": "τ",
         "latex": "\\tau",
         "type": "Greek and Hebrew letters"
@@ -148,7 +148,7 @@ angular.module('org.ekstep.mathtext', [])
         "symbol": "υ",
         "latex": "\\upsilon",
         "type": "Greek and Hebrew letters"
-      },{
+      }, {
         "symbol": "ξ",
         "latex": "\\xi",
         "type": "Greek and Hebrew letters"
@@ -162,7 +162,7 @@ angular.module('org.ekstep.mathtext', [])
         "symbol": "∆",
         "latex": "\\Delta",
         "type": "Greek and Hebrew letters"
-      },{
+      }, {
         "symbol": "Γ",
         "latex": "\\Gamma",
         "type": "Greek and Hebrew letters"
@@ -176,7 +176,7 @@ angular.module('org.ekstep.mathtext', [])
         "symbol": "Ω",
         "latex": "\\Omega",
         "type": "Greek and Hebrew letters"
-      },{
+      }, {
         "symbol": "Φ",
         "latex": "\\Phi",
         "type": "Greek and Hebrew letters"
@@ -190,7 +190,7 @@ angular.module('org.ekstep.mathtext', [])
         "symbol": "Ψ",
         "latex": "\\Psi",
         "type": "Greek and Hebrew letters"
-      },{
+      }, {
         "symbol": "Σ",
         "latex": "\\Sigma",
         "type": "Greek and Hebrew letters"
@@ -204,207 +204,360 @@ angular.module('org.ekstep.mathtext', [])
         "symbol": "Υ",
         "latex": "\\Upsilon",
         "type": "Greek and Hebrew letters"
-      },{
+      }, {
         "symbol": "∗",
         "latex": "\\ast",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "×",
         "latex": "\\times",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "÷",
         "latex": "\\div",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "",
         "latex": "\\centerdot",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "≡",
         "latex": "\\equiv",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∼=",
         "latex": "\\cong",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "6=",
         "latex": "\\neq",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∼",
         "latex": "\\sim",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "'",
         "latex": "\\simeq",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "≈",
         "latex": "\\approx",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∝",
         "latex": "\\propto",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "|=",
         "latex": "\\models",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "u",
         "latex": "\\approxeq",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "±",
         "latex": "\\pm",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∓",
         "latex": "\\mp",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "≤",
         "latex": "\\leq",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "<<",
         "latex": "\\ll",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "⊂",
         "latex": "\\subset",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "⊆",
         "latex": "\\subseteq",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∈",
         "latex": "\\in",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "⊥",
         "latex": "\\perp",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "|",
         "latex": "\\mid",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "k",
         "latex": "\\parallel",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∈/",
         "latex": "\\notin",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∩",
         "latex": "\\cap",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∪",
         "latex": "\\cup",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "≥",
         "latex": "\\geq",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∧",
         "latex": "\\wedge",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "∨",
         "latex": "\\vee",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "",
         "latex": "\\gg",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "⊃",
         "latex": "\\supset",
         "type": "Binary Operation/Relation Symbols"
-      },{
+      }, {
         "symbol": "⊇",
         "latex": "\\supseteq",
         "type": "Binary Operation/Relation Symbols"
+      }, {
+        "symbol": "",
+        "latex": "\\leftarrow",
+        "type": "Arrow"
+      }, {
+        "symbol": "⇐",
+        "latex": "\\Leftarrow",
+        "type": "Arrow"
+      }, {
+        "symbol": "→",
+        "latex": "\\rightarrow",
+        "type": "Arrow"
+      }, {
+        "symbol": "⇒",
+        "latex": "\\Rightarrow",
+        "type": "Arrow"
+      }, {
+        "symbol": "↔",
+        "latex": "\\leftrightarrow",
+        "type": "Arrow"
+      }, {
+        "symbol": "⇔",
+        "latex": "\\Leftrightarrow",
+        "type": "Arrow"
+      }, {
+        "symbol": "",
+        "latex": "\\dashrightarrow",
+        "type": "Arrow"
+      },
+      {
+        "symbol": "",
+        "latex": "\\leftrightarrows",
+        "type": "Arrow"
+      }, {
+        "symbol": "",
+        "latex": "\\rightleftharpoons",
+        "type": "Arrow"
+      }, {
+        "symbol": "",
+        "latex": "\\rightharpoonup",
+        "type": "Arrow"
+      }, {
+        "symbol": "",
+        "latex": "\\rightharpoondown",
+        "type": "Arrow"
+      }, {
+        "symbol": "",
+        "latex": "\\dashleftarrow",
+        "type": "Arrow"
+      }, {
+        "symbol": "∞",
+        "latex": "\\infty",
+        "type": "Miscellaneous"
+      }, {
+        "symbol": "∇",
+        "latex": "\\nabla",
+        "type": "Miscellaneous"
+      }, {
+        "symbol": "∂",
+        "latex": "\\partial",
+        "type": "Miscellaneous"
+      }, {
+        "symbol": "∠",
+        "latex": "\\angle",
+        "type": "Miscellaneous"
+      }, {
+        "symbol": "4",
+        "latex": "\\triangle",
+        "type": "Miscellaneous"
       }
     ];
-    $scope.symbolType = _.uniqBy($scope.symbols, function(symbol) { return symbol.type; });
+
     $scope.equations = [{
-        "equation": "β",
-        "latex": "\\beta",
-        "type": "fractions"
+        "symbol": "cos",
+        "latex": "\\cos",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "csc",
+        "latex": "\\csc",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "lg",
+        "latex": "\\lg",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "ln",
+        "latex": "\\ln",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "cot",
+        "latex": "\\cot",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "lim",
+        "latex": "\\lim",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "log",
+        "latex": "\\log",
+        "type": "Trigonometric functions"
       },
       {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
+        "symbol": "sec",
+        "latex": "\\sec",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "tan",
+        "latex": "\\tan",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "dim ",
+        "latex": "\\dim",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "sin",
+        "latex": "\\sin",
+        "type": "Trigonometric functions"
+      }, {
+        "symbol": "",
+        "latex": "\\left\\{\\right\\}^\\left\\{\\right\\}",
+        "type": "Superscripts and subscripts"
+      }, {
+        "symbol": "",
+        "latex": "\\left\\{\\right\\}_\\left\\{\\right\\}",
+        "type": "Superscripts and subscripts"
+      }, {
+        "symbol": "",
+        "latex": "\\frac{\\left\\{\\right\\}}{\\left\\{\\right\\}}\\left\\{\\right\\}",
+        "type": "Superscripts and subscripts"
+      }, {
+        "symbol": "",
+        "latex": "\\left\\{\\right\\}\\left\\frac{\\left\\{\\right\\}}{\\left\\{\\right\\}}\\right",
+        "type": "Superscripts and subscripts"
+      }, {
+        "symbol": "",
+        "latex": "\\",
+        "type": "Fractions"
+      }, {
+        "symbol": "",
+        "latex": "\\",
+        "type": "Fractions"
+      }, {
+        "symbol": "",
+        "latex": "\\",
+        "type": "Fractions"
       },
       {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
-      },
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "alpha"
+        "symbol": "",
+        "latex": "\\",
+        "type": "Fractions"
       }
     ];
 
     var MQ = MathQuill.getInterface(2); // eslint-disable-line no-undef
     $scope.valid = false;
-    $scope.symbolsArray = $scope.symbols;
+    $scope.symbolType = _.uniqBy($scope.symbols, function(symbol) { return symbol.type; });
+    $scope.equationType = _.uniqBy($scope.equations, function(equation) { return equation.type; });
+    $scope.symbolsDivision = {};
+    $scope.equationsDivision = {};
+    $scope.latexDivision = {};
+
+    _.each($scope.symbolType, function(value, key) {
+      $scope.symbolsDivision[value.type] = [];
+      $scope.latexDivision[value.type] = [];
+      _.each($scope.symbols, function(val, key) {
+        if (value.type == val.type) {
+          $scope.symbolsDivision[value.type].push(val);
+          $scope.latexDivision[val.type].push(val);
+        }
+      });
+    });
+
+    _.each($scope.equationType, function(value, key) {
+      $scope.equationsDivision[value.type] = [];
+      _.each($scope.equations, function(val, key) {
+        if (value.type == val.type) {
+          $scope.equationsDivision[value.type].push(val);
+        }
+      });
+    });
+
+    $scope.symbolsDropDown = $scope.symbolsDivision;
+    $scope.equationsDropDown = $scope.equationsDivision;
+    $scope.latexDropDown = $scope.latexDivision;
+
+    $scope.$on('ngDialog.opened', function(e, $dialog) {
+      var mathTextElement = document.getElementsByClassName('mathtextEditor_1');
+      mathTextElement = mathTextElement[0];
+      $scope.selectedText = false;
+      var textObj = ecEditor.getCurrentObject();
+      if (e.currentScope.ngDialogData && e.currentScope.ngDialogData.textSelected && textObj) {
+        $scope.selectedText = true;
+        $timeout(function() {
+          $scope.latexToEquations(textObj.config.latex);
+        }, 500);
+      }
+    });
     $timeout(function() {
       $('.menu .item').tab();
-      $('.ui.dropdown').dropdown({
-        onChange: function(val) {
+      $('.ui.dropdown.latex-dropdown').dropdown({
+        onChange: function(val, text, $choice) {
+          $scope.latexDropDown = $scope.latexDivision;
           if (val != "all") {
-            $scope.symbolsArray = [];
-            _.each($scope.symbols, function(value, key) {
-              if (value.type.toLowerCase() == val) {
-                $scope.symbolsArray.push(value);
-              }
-            })
-          } else {
-            $scope.symbolsArray = $scope.symbols;
+            $scope.latexDropDown = {};
+            $scope.latexDropDown[text] = $scope.latexDivision[text];
           }
-          console.log($scope.symbolsArray);
+          $scope.$safeApply();
+        }
+      });
+      $('.ui.dropdown.equations-dropdown').dropdown({
+        onChange: function(val, text, $choice) {
+          $scope.equationsDropDown = $scope.equationsDivision;
+          if (val != "all") {
+            $scope.equationsDropDown = {};
+            $scope.equationsDropDown[text] = $scope.equationsDivision[text];
+          }
+          $scope.$safeApply();
+        }
+      });
+      $('.ui.dropdown.symbols-dropdown').dropdown({
+        onChange: function(val, text, $choice) {
+          $scope.symbolsDropDown = $scope.symbolsDivision;
+          if (val != "all") {
+            $scope.symbolsDropDown = {};
+            $scope.symbolsDropDown[text] = $scope.symbolsDivision[text];
+          }
           $scope.$safeApply();
         }
       });
