@@ -613,7 +613,8 @@ angular.module('org.ekstep.mathtext', [])
         "fill": "rgba(0, 0, 0, 0)",
         "opacity": 1,
         "fontFamily": 'NotoSans',
-        "fontSize": 18
+        "fontSize": 18,
+        "backgroundcolor" : "#fff"
       });
       $scope.closeThisDialog();
     }

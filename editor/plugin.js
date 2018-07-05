@@ -74,10 +74,10 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
       var div = ecEditor.jQuery("div#" + elem.id);
     
       if (obj.configData) {
-        if (obj.configData.fontsize) {
-          elem.editorObj.fontSize = obj.configData.fontsize;
-          elem.attributes.fontsize = obj.configData.fontsize;
-          div.css('fontSize', obj.configData.fontsize + 'px');
+        if (obj.configData.fontSize) {
+          elem.editorObj.fontSize = obj.configData.fontSize;
+          elem.attributes.fontSize = obj.configData.fontSize;
+          div.css('fontSize', obj.configData.fontSize + 'px');
           div.css('width', "auto");
           div.css('height', "auto");
           var width = div.width();
@@ -88,6 +88,16 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
           elem.attributes.h = height;
           div.css('width', width);
           div.css('height', height);
+        }
+        if(obj.configData.color){
+          elem.editorObj.color = obj.configData.color;
+          elem.attributes.color = obj.configData.color;
+          div.css('color', obj.configData.color);
+        }
+        if(obj.configData.backgroundcolor){
+          elem.editorObj.backgroundcolor = obj.configData.backgroundcolor;
+          elem.attributes.backgroundcolor = obj.configData.backgroundcolor;
+          div.css('background-color', obj.configData.backgroundcolor);
         }
       }
       ecEditor.render();
@@ -166,6 +176,12 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     div.style.position = 'absolute';
     if(instance.editorObj.fontSize){
       div.style.fontSize = instance.editorObj.fontSize + 'px';
+    }
+    if(instance.editorObj.color){
+      div.style.color = instance.editorObj.color;
+    }
+    if(instance.editorObj.backgroundcolor){
+      div.style['background-color'] = instance.editorObj.backgroundcolor;
     }
    
     div.style.fontFamily = 'NotoSans';
