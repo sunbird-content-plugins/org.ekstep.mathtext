@@ -157,9 +157,6 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
   },
 
   addDivElement: function(event, instance) {
-    if (!(_.isUndefined(instance.data))) {
-      instance = instance.data;
-    }
     var canvasCord = ecEditor.jQuery('#canvas').offset();
     var div = document.createElement('div');
     div.setAttribute("id", instance.id);
@@ -172,9 +169,7 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     div.style.width = instance.editorObj.width ? instance.editorObj.width + 1 + 'px' : "auto";
     div.style.height = instance.editorObj.height ? instance.editorObj.height + 1 + 'px' : "auto";
     div.style.pointerEvents = "none";
-    if(ecEditor.jQuery("div#" + instance.id)){
-      ecEditor.jQuery("div#" + instance.id).remove();
-    }
+    ecEditor.jQuery(".canvas-container #" + this.mathTextId).html('');
     ecEditor.jQuery(".canvas-container #" + this.mathTextId).append(div);
     ecEditor.jQuery("#" + instance.id).offset({ 'top': instance.editorObj.top + canvasCord.top, 'left': Number(parseInt(ecEditor.jQuery(".canvas-container").css('margin-left'))) + (instance.editorObj.left + canvasCord.left) });
     this.latexToEquation(instance.config.latex, div.id);

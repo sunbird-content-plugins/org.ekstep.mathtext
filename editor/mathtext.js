@@ -62,7 +62,7 @@ angular.module('org.ekstep.mathtext', [])
         "latex": "\\delta",
         "type": "Greek and Hebrew letters"
       }, {
-        "symbol": "",
+        "symbol": "ϵ",
         "latex": "\\epsilon",
         "type": "Greek and Hebrew letters"
       },
@@ -333,7 +333,7 @@ angular.module('org.ekstep.mathtext', [])
         "latex": "\\supseteq",
         "type": "Binary Operation/Relation Symbols"
       }, {
-        "symbol": "",
+        "symbol": "←",
         "latex": "\\leftarrow",
         "type": "Arrow"
       }, {
@@ -357,12 +357,12 @@ angular.module('org.ekstep.mathtext', [])
         "latex": "\\Leftrightarrow",
         "type": "Arrow"
       }, {
-        "symbol": "",
+        "symbol": "-->",
         "latex": "\\dashrightarrow",
         "type": "Arrow"
       },
       {
-        "symbol": "",
+        "symbol": "←",
         "latex": "\\leftrightarrows",
         "type": "Arrow"
       }, {
@@ -370,15 +370,15 @@ angular.module('org.ekstep.mathtext', [])
         "latex": "\\rightleftharpoons",
         "type": "Arrow"
       }, {
-        "symbol": "",
+        "symbol": "⇀",
         "latex": "\\rightharpoonup",
         "type": "Arrow"
       }, {
-        "symbol": "",
+        "symbol": "⇁",
         "latex": "\\rightharpoondown",
         "type": "Arrow"
       }, {
-        "symbol": "",
+        "symbol": "<--",
         "latex": "\\dashleftarrow",
         "type": "Arrow"
       }, {
