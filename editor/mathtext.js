@@ -6,10 +6,10 @@
 angular.module('org.ekstep.mathtext', [])
   .controller('mathTextController', ['$scope', 'instance', '$timeout', function($scope, instance, $timeout) {
 
-    // var MQ = MathQuill.getInterface(2);
     var mathField, latex, latexSpan, hiddenSpanArea;
     $scope.isMathWysiwyg = true;
-    $scope.libraryEquations = [{
+    $scope.libraryEquations = [
+      {
         "title": "Area of circle",
         "latex": "A = \\pi r^2"
       },
@@ -47,7 +47,8 @@ angular.module('org.ekstep.mathtext', [])
       }
     ];
 
-    $scope.symbols = [{
+    $scope.symbols = [
+      {
         "symbol": "α",
         "latex": "\\alpha",
         "type": "Greek and Hebrew letters"
@@ -404,7 +405,8 @@ angular.module('org.ekstep.mathtext', [])
       }
     ];
 
-    $scope.equations = [{
+    $scope.equations = [
+      {
         "symbol": "cos",
         "latex": "\\cos",
         "type": "Trigonometric functions"
@@ -517,18 +519,32 @@ angular.module('org.ekstep.mathtext', [])
     $scope.equationsDropDown = $scope.equationsDivision;
     $scope.latexDropDown = $scope.latexDivision;
 
+    $scope.instance = instance;
+
     $scope.$on('ngDialog.opened', function(e, $dialog) {
-      var mathTextElement = document.getElementsByClassName('mathtextEditor_1');
-      mathTextElement = mathTextElement[0];
-      $scope.selectedText = false;
-      var textObj = ecEditor.getCurrentObject();
-      if (e.currentScope.ngDialogData && e.currentScope.ngDialogData.textSelected && textObj) {
-        $scope.selectedText = true;
-        $timeout(function() {
-          $scope.latexToEquations(textObj.config.latex);
-        }, 500);
+      var currentScope = e.currentScope;
+      if(currentScope.instance.mode === currentScope.instance.modes.integration) {
+        if(currentScope.instance.textSelected) {
+          $timeout(function () {
+            $scope.selectedText = currentScope.instance.textSelected;
+            $scope.latexToEquations(currentScope.instance.latex);
+          }, 500);
+        }
+      } else {
+        var mathTextElement = document.getElementsByClassName('mathtextEditor_1');
+        mathTextElement = mathTextElement[0];
+        $scope.selectedText = false;
+        var textObj = ecEditor.getCurrentObject();
+        if (currentScope.ngDialogData && currentScope.ngDialogData.textSelected && textObj) {
+          $scope.selectedText = true;
+          $timeout(function () {
+            $scope.latexToEquations(textObj.config.latex);
+          }, 500);
+        }
       }
+      $scope.instanceId = currentScope.ngDialogData.instanceId;
     });
+
     $timeout(function() {
       $('.menu .item').tab();
       $('.ui.dropdown.latex-dropdown').dropdown({
@@ -593,31 +609,42 @@ angular.module('org.ekstep.mathtext', [])
 
     $scope.latexToEquations = function(latex) {
       mathField.write(latex);
-    }
+    };
 
     $scope.latexToFormula = function(id, latex) {
       var mathDiv = document.getElementById(id);
       katex.render(latex, mathDiv, { displayMode: true }); // eslint-disable-line no-undef
-    }
+    };
 
     $scope.addToStage = function() {
-      // Convert the latex or mathquill to equation 
-      // add it to the stage
-      $(".mq-textarea").remove();
       var equation = document.getElementById('latex').innerHTML;
-      ecEditor.dispatchEvent('org.ekstep.mathtext:create', {
-        "latex": equation,
-        "type": "rect",
-        "x": 10,
-        "y": 20,
-        "fill": "rgba(0, 0, 0, 0)",
-        "opacity": 1,
-        "fontFamily": 'NotoSans',
-        "fontSize": 18,
-        "backgroundcolor" : "#fff"
-      });
+      if(instance.mode === instance.modes.integration) {
+        instance.callbackFn(equation, instance.textSelected);
+      } else {
+        // Convert the latex or mathquill to equation
+        // add it to the stage
+        // $(".mq-textarea").remove();
+        if ($scope.selectedText && $scope.instanceId) {
+          ecEditor.dispatchEvent('org.ekstep.mathtext:edit', {
+            instanceId: $scope.instanceId,
+            latex: equation
+          });
+        } else {
+          ecEditor.dispatchEvent('org.ekstep.mathtext:create', {
+            "latex": equation,
+            "type": "rect",
+            "x": 10,
+            "y": 20,
+            "fill": "rgba(0, 0, 0, 0)",
+            "opacity": 1,
+            "fontFamily": 'NotoSans',
+            "fontSize": 18,
+            "backgroundcolor": "#fff"
+          });
+        }
+      }
       $scope.closeThisDialog();
     }
-  }])
+  }]);
 
 //# sourceURL=mathText.js

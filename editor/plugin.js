@@ -10,18 +10,29 @@ org.ekstep.mathtext = {};
 org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
   type: "org.ekstep.mathtext",
   mathTextId: 'mathtext-wrapper',
+  modes: {
+    standalone: 'standalone',
+    integration: 'integration'
+  },
+  mode: undefined,
+  callbackFn: undefined,
+  latex: undefined,
+  textSelected: false,
+  instanceId: null,
   /**
    * Register events.
    * @memberof org.ekstep.question
    */
   initialize: function() {
     var instance = this;
+    this.mode = this.modes.standalone;
     ecEditor.addEventListener("org.ekstep.mathtext:showpopup", this.loadHtml, this);
     ecEditor.addEventListener("org.ekstep.mathtext:changeConfig", this.onConfigChange, this);
     var templatePath = ecEditor.resolvePluginResource(instance.manifest.id, instance.manifest.ver, 'editor/mathtext.html');
     var controllerPath = ecEditor.resolvePluginResource(instance.manifest.id, instance.manifest.ver, 'editor/mathtext.js');
     ecEditor.getService(ServiceConstants.POPUP_SERVICE).loadNgModules(templatePath, controllerPath);
     ecEditor.addEventListener(instance.manifest.id + ":adddiv", this.addDivElement, this);
+    ecEditor.addEventListener(instance.manifest.id + ":edit", this.editMathText, this);
     ecEditor.addEventListener('stage:unselect', this.removeHtmlElements, this);
     ecEditor.addEventListener('stage:create', this.removeHtmlElements, this);
     window.MQ = MathQuill.getInterface(2);
@@ -36,8 +47,18 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
    *  @param {Object} data Data passed during event dispatch
    */
   loadHtml: function(event, data) {
+    if(data && ecEditor._.isFunction(data.callback)) {
+      this.mode = this.modes.integration;
+      this.callbackFn = data.callback;
+      if(ecEditor._.isString(data.latex)) {
+        this.latex = data.latex;
+      }
+    }
     if (document.getElementsByClassName('mathtextEditor_1').length > 0) { return }; // Dont open popup if already opened
-    this.textSelected = data ? data.textSelected : false;
+    if(data) {
+      this.textSelected = data.textSelected ? data.textSelected : false;
+      this.instanceId = data.id ? data.id : null;
+    }
     var currentInstance = this;
     ecEditor.getService(ServiceConstants.POPUP_SERVICE).open({
       template: 'mathTextBrowser',
@@ -48,7 +69,7 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
           return currentInstance;
         }
       },
-      data: { 'textSelected': this.textSelected },
+      data: { 'textSelected': this.textSelected, 'instanceId': this.instanceId },
       width: 900,
       showClose: false,
       className: 'qc-ngdialog-custome mathtextEditor_1'
@@ -185,7 +206,6 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     div.style.width = instance.editorObj.width ? instance.editorObj.width + 1 + 'px' : "auto";
     div.style.height = instance.editorObj.height ? instance.editorObj.height + 1 + 'px' : "auto";
     div.style.pointerEvents = "none";
-    ecEditor.jQuery(".canvas-container #" + this.mathTextId).html('');
     ecEditor.jQuery(".canvas-container #" + this.mathTextId).append(div);
     ecEditor.jQuery("#" + instance.id).offset({ 'top': instance.editorObj.top + canvasCord.top, 'left': Number(parseInt(ecEditor.jQuery(".canvas-container").css('margin-left'))) + (instance.editorObj.left + canvasCord.left) });
     this.latexToEquation(instance.config.latex, div.id);
@@ -195,6 +215,13 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     ecEditor.jQuery("#" + instance.id).height(elemHeight);
     instance.editorObj.width = elemWidth;
     instance.editorObj.height = elemHeight;
+  },
+  editMathText: function(event, data) {
+    ecEditor.jQuery('.canvas-container').find('#'+data.instanceId).html('');
+    this.latexToEquation(data.latex, data.instanceId);
+    var pluginInstance = ecEditor.getPluginInstance(data.instanceId);
+    pluginInstance.attributes['latex'] = data.latex;
+    pluginInstance.config['latex'] = data.latex;
   },
   latexToEquation: function(mathText, id) {
     var mathDiv = document.getElementById(id);
@@ -212,8 +239,9 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
 
   dblClickHandler: function(event) {
     // Checking if tagret element is canvas and richtext is selected then only open richtext popup
-    if (event.target.tagName.toLowerCase() == 'canvas' && ecEditor.getCurrentObject() && ecEditor.getCurrentObject().manifest.id === 'org.ekstep.mathtext') {
-      ecEditor.dispatchEvent("org.ekstep.mathtext:showpopup", { textSelected: true });
+    var currentObject = ecEditor.getCurrentObject();
+    if (event.target.tagName.toLowerCase() == 'canvas' && currentObject && currentObject.manifest.id === 'org.ekstep.mathtext') {
+      ecEditor.dispatchEvent("org.ekstep.mathtext:showpopup", { textSelected: true, id: currentObject.id });
     }
   }
 });
