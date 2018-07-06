@@ -10,7 +10,7 @@ org.ekstep.mathtext.RendererPlugin = Plugin.extend({
   initPlugin: function(data) {
     var pluginData;
 
-    if (!_.isUndefined(data.data))
+    if (!_.isUndefined(data.config))
       pluginData = JSON.parse(data.config.__cdata);
 
     var pid = data._id || data.id;
@@ -32,9 +32,9 @@ org.ekstep.mathtext.RendererPlugin = Plugin.extend({
     div.style.width = dims.w + 'px';
     div.style.height = dims.h + 'px';
     div.style.position = 'absolute';
-    var fontSize = this.updateFontSize(parseFloat(mathData.fontSize));
-    div.style.fontSize = fontSize + 'px';
+    div.style.fontSize = pluginData.fontsize;
     div.style.color = mathData.color;
+    div.style.backgroundColor = mathData.backgroundcolor;
     div.style.textAlign = mathData.align;
 
     var parentDiv = document.getElementById(Renderer.divIds.gameArea);
@@ -46,15 +46,6 @@ org.ekstep.mathtext.RendererPlugin = Plugin.extend({
     this._self = new createjs.DOMElement(div);
     this._self.x = dims.x;
     this._self.y = dims.y;
-  },
-  updateFontSize: function(initFontSize) {
-    // Convert fontSize to pixel based on device dimensions
-    var exp = parseFloat(PluginManager.defaultResWidth * this.relativeDims().w / 100);
-    var cw = this._parent.dimensions().w;
-    var width = parseFloat(cw * this.relativeDims().w / 100);
-    var scale = parseFloat(width / exp);
-    var fontsize = parseFloat(initFontSize * scale);
-    return fontsize;
   },
   latexToEquation: function(mathText, id) {
     var mathDiv = document.getElementById(id);
