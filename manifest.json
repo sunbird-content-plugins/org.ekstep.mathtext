@@ -40,7 +40,7 @@
       "type": "image",
       "toolTip": "Add Math text",
       "title": "Question Set",
-      "iconImage": "assets/sigma.svg",
+      "iconImage": "assets/sigma.png",
       "onclick":
       {
         "id": "org.ekstep.mathtext:showpopup"
