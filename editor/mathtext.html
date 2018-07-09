@@ -1,0 +1,105 @@
+<script type="text/ng-template" id="mathTextBrowser" ng-controller="mathTextController">
+  <div class="ui modal math-modal active">
+    <div id="context1">
+      <div class="ui secondary menu math-tab-head">
+        <a class="item active" data-tab="library">Library</a>
+        <a class="item" data-tab="symbols">Symbols</a>
+        <a class="item" data-tab="equations">Equations</a>
+        <a class="item" data-tab="latex">LaTex</a>
+        <i class="cursor-pointer close link icon math-close-tab" ng-click="closeThisDialog();"></i>
+      </div>
+      <div class="math-content">
+        <div class="ui tab segment active math-tab" data-tab="library">
+          <div class="ui large items">
+            <div class="item select list-items math-lib" ng-repeat="lib in libraryEquations" ng-click="latexToEquations(lib.latex)">
+              <div class="middle aligned content">
+                <div class="math-lib-header">{{lib.title}}</div>
+                <div class="meta math-lib-meta" id="libFormula{{$index}}" ng-bind="latexToFormula('libFormula{{$index}}',lib.latex)"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui tab segment math-tab" data-tab="symbols">
+          <div class="ui right aligned grid">
+            <div class="right floated right aligned six wide column">
+              <div class="ui dropdown symbols-dropdown item right">
+                Math Symbols
+                <i class="dropdown icon"></i>
+                <div class="right menu">
+                  <a class="item">All</a>
+                  <a class="item" ng-repeat="symbol in symbolType">{{symbol.type}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui grid" ng-repeat="(key, value) in symbolsDropDown">
+            <div class="sixteen wide column">{{key}}</div>
+            <div class="two wide column math-symbols" ng-repeat="val in value">
+              <span class="symbol-div">
+                <span class="math-symbol" id="val{{$index}}" ng-click="latexToEquations(val.latex);">{{val.symbol}}</span>
+                <span class="symbol-latex">{{val.latex}}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui tab segment math-tab" data-tab="equations">
+          <div class="ui right aligned grid">
+            <div class="right floated right aligned six wide column">
+              <div class="ui dropdown equations-dropdown item">
+                Equations
+                <i class="dropdown icon"></i>
+                <div class="right menu">
+                  <a class="item">All</a>
+                  <a class="item" ng-repeat="equation in equationType">{{equation.type}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui grid" ng-repeat="(key, value) in equationsDropDown">
+            <div class="sixteen wide column">{{key}}</div>
+            <div class="two wide column math-symbols" ng-repeat="val in value">
+              <span class="math-symbol" id="val{{$index}}" ng-click="latexToEquations(val.latex);">{{val.symbol}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="ui tab segment math-tab" data-tab="latex">
+          <div class="ui right aligned grid">
+            <div class="right floated right aligned six wide column">
+              <div class="ui dropdown latex-dropdown item right">
+                Math Symbols 
+                <i class="dropdown icon"></i>
+                <div class="right menu">
+                  <a class="item">All</a>
+                  <a class="item" ng-repeat="symbol in symbolType">{{symbol.type}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div ng-repeat="(key, value) in latexDropDown">
+            <div class="ui twelve column grid math-latex">{{key}}</div>
+            <div class="ui three column grid math-latex">
+              <div class="column math-latex-div" ng-repeat="val in value" ng-click="latexToEquations(val.latex);">
+                <span class="math-latex-symbols" id="val{{$index}}">{{val.symbol}}</span>
+                <span>{{val.latex}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="actions math-footer">
+      <div class="ui two column grid">
+        <div class="ui nine wide column math-formula">
+          <span id="math-field"></span>
+          <span id="latex"></span>
+        </div>
+        <div class="ui three wide column right aligned math-add-button-div">
+          <button class="ui basic primary button math-add-button" ng-click="addToStage()" type="button">Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <mathquill ng-model="mlatex" /> -->
+  </div>
+</script>
