@@ -4,7 +4,7 @@
  * @author Swati Singh <swati.singh@tarento.com>
  */
 angular.module('org.ekstep.mathtext', [])
-  .controller('mathTextController', ['$scope', 'instance', '$timeout', function($scope, instance, $timeout) {
+  .controller('mathTextController', ['$scope', 'instance', '$timeout', function ($scope, instance, $timeout) {
 
     var mathField, latex, latexSpan, hiddenSpanArea;
     $scope.isMathWysiwyg = true;
@@ -47,458 +47,371 @@ angular.module('org.ekstep.mathtext', [])
       }
     ];
 
-    $scope.symbols = [
-      {
-        "symbol": "α",
-        "latex": "\\alpha",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "β",
-        "latex": "\\beta",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "δ",
-        "latex": "\\delta",
-        "type": "Greek and Hebrew letters"
-      }, {
-        "symbol": "ϵ",
-        "latex": "\\epsilon",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "η",
-        "latex": "\\eta",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "γ",
-        "latex": "\\gamma",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "ι",
-        "latex": "\\iota",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "κ",
-        "latex": "\\kappa",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "λ",
-        "latex": "\\lambda",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "µ",
-        "latex": "\\mu",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "ν",
-        "latex": "\\nu",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "o",
-        "latex": "o",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "ω",
-        "latex": "\\omega",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "φ",
-        "latex": "\\phi",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "π",
-        "latex": "\\pi",
-        "type": "Greek and Hebrew letters"
-      }, {
-        "symbol": "α",
-        "latex": "\\psi",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "ρ",
-        "latex": "\\rho",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "σ",
-        "latex": "\\sigma",
-        "type": "Greek and Hebrew letters"
-      }, {
-        "symbol": "τ",
-        "latex": "\\tau",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "θ",
-        "latex": "\\theta",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "υ",
-        "latex": "\\upsilon",
-        "type": "Greek and Hebrew letters"
-      }, {
-        "symbol": "ξ",
-        "latex": "\\xi",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "ζ",
-        "latex": "\\zeta",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "∆",
-        "latex": "\\Delta",
-        "type": "Greek and Hebrew letters"
-      }, {
-        "symbol": "Γ",
-        "latex": "\\Gamma",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "Λ",
-        "latex": "\\Lambda",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "Ω",
-        "latex": "\\Omega",
-        "type": "Greek and Hebrew letters"
-      }, {
-        "symbol": "Φ",
-        "latex": "\\Phi",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "Π",
-        "latex": "\\Pi",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "Ψ",
-        "latex": "\\Psi",
-        "type": "Greek and Hebrew letters"
-      }, {
-        "symbol": "Σ",
-        "latex": "\\Sigma",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "Θ",
-        "latex": "\\Theta",
-        "type": "Greek and Hebrew letters"
-      },
-      {
-        "symbol": "Υ",
-        "latex": "\\Upsilon",
-        "type": "Greek and Hebrew letters"
-      }, {
-        "symbol": "∗",
-        "latex": "\\ast",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "×",
-        "latex": "\\times",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "÷",
-        "latex": "\\div",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "",
-        "latex": "\\centerdot",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "≡",
-        "latex": "\\equiv",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∼=",
-        "latex": "\\cong",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "6=",
-        "latex": "\\neq",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∼",
-        "latex": "\\sim",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "'",
-        "latex": "\\simeq",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "≈",
-        "latex": "\\approx",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∝",
-        "latex": "\\propto",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "|=",
-        "latex": "\\models",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "u",
-        "latex": "\\approxeq",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "±",
-        "latex": "\\pm",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∓",
-        "latex": "\\mp",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "≤",
-        "latex": "\\leq",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "<<",
-        "latex": "\\ll",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "⊂",
-        "latex": "\\subset",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "⊆",
-        "latex": "\\subseteq",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∈",
-        "latex": "\\in",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "⊥",
-        "latex": "\\perp",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "|",
-        "latex": "\\mid",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "k",
-        "latex": "\\parallel",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∈/",
-        "latex": "\\notin",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∩",
-        "latex": "\\cap",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∪",
-        "latex": "\\cup",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "≥",
-        "latex": "\\geq",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∧",
-        "latex": "\\wedge",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "∨",
-        "latex": "\\vee",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "",
-        "latex": "\\gg",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "⊃",
-        "latex": "\\supset",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "⊇",
-        "latex": "\\supseteq",
-        "type": "Binary Operation/Relation Symbols"
-      }, {
-        "symbol": "←",
-        "latex": "\\leftarrow",
-        "type": "Arrow"
-      }, {
-        "symbol": "⇐",
-        "latex": "\\Leftarrow",
-        "type": "Arrow"
-      }, {
-        "symbol": "→",
-        "latex": "\\rightarrow",
-        "type": "Arrow"
-      }, {
-        "symbol": "⇒",
-        "latex": "\\Rightarrow",
-        "type": "Arrow"
-      }, {
-        "symbol": "↔",
-        "latex": "\\leftrightarrow",
-        "type": "Arrow"
-      }, {
-        "symbol": "⇔",
-        "latex": "\\Leftrightarrow",
-        "type": "Arrow"
-      }, {
-        "symbol": "-->",
-        "latex": "\\dashrightarrow",
-        "type": "Arrow"
-      },
-      {
-        "symbol": "←",
-        "latex": "\\leftrightarrows",
-        "type": "Arrow"
-      }, {
-        "symbol": "",
-        "latex": "\\rightleftharpoons",
-        "type": "Arrow"
-      }, {
-        "symbol": "⇀",
-        "latex": "\\rightharpoonup",
-        "type": "Arrow"
-      }, {
-        "symbol": "⇁",
-        "latex": "\\rightharpoondown",
-        "type": "Arrow"
-      }, {
-        "symbol": "<--",
-        "latex": "\\dashleftarrow",
-        "type": "Arrow"
-      }, {
-        "symbol": "∞",
-        "latex": "\\infty",
-        "type": "Miscellaneous"
-      }, {
-        "symbol": "∇",
-        "latex": "\\nabla",
-        "type": "Miscellaneous"
-      }, {
-        "symbol": "∂",
-        "latex": "\\partial",
-        "type": "Miscellaneous"
-      }, {
-        "symbol": "∠",
-        "latex": "\\angle",
-        "type": "Miscellaneous"
-      }, {
-        "symbol": "4",
-        "latex": "\\triangle",
-        "type": "Miscellaneous"
-      }
-    ];
+    // Each object definition is:
+    // {
+    //   latex: <string>, // Latex string to enter into math-field on click
+    //   latexDisplay: <string>, // Latex string used to display in the UI (sometimes the latex used to display is different from the latex entered into math-field)
+    //   icon: <string>, // If an icon should be displayed instead of latex
+    //   symbol: <string> // If a literal symbol should be displayed instead of latex
+    // }
+    // Precedence for display in the UI: latexDisplay -> icon -> symbol -> latex
 
-    $scope.equations = [
-      {
-        "symbol": "cos",
-        "latex": "\\cos",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "csc",
-        "latex": "\\csc",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "lg",
-        "latex": "\\lg",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "ln",
-        "latex": "\\ln",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "cot",
-        "latex": "\\cot",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "lim",
-        "latex": "\\lim",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "log",
-        "latex": "\\log",
-        "type": "Trigonometric functions"
-      },
-      {
-        "symbol": "sec",
-        "latex": "\\sec",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "tan",
-        "latex": "\\tan",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "dim ",
-        "latex": "\\dim",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "sin",
-        "latex": "\\sin",
-        "type": "Trigonometric functions"
-      }, {
-        "symbol": "",
-        "latex": "\\left\\{\\right\\}^\\left\\{\\right\\}",
-        "type": "Superscripts and subscripts"
-      }, {
-        "symbol": "",
-        "latex": "\\left\\{\\right\\}_\\left\\{\\right\\}",
-        "type": "Superscripts and subscripts"
-      }, {
-        "symbol": "",
-        "latex": "\\frac{\\left\\{\\right\\}}{\\left\\{\\right\\}}\\left\\{\\right\\}",
-        "type": "Superscripts and subscripts"
-      }, {
-        "symbol": "",
-        "latex": "\\left\\{\\right\\}\\left\\frac{\\left\\{\\right\\}}{\\left\\{\\right\\}}\\right",
-        "type": "Superscripts and subscripts"
-      }, {
-        "symbol": "",
-        "latex": "\\",
-        "type": "Fractions"
-      }, {
-        "symbol": "",
-        "latex": "\\",
-        "type": "Fractions"
-      }, {
-        "symbol": "",
-        "latex": "\\",
-        "type": "Fractions"
-      },
-      {
-        "symbol": "",
-        "latex": "\\",
-        "type": "Fractions"
-      }
-    ];
+    $scope.symbols = {
+      greek: [
+        {
+          latex: "\\alpha",
+        },
+        {
+          latex: "\\beta",
+        },
+        {
+          latex: "\\delta",
+        },
+        {
+          latex: "\\epsilon",
+        },
+        {
+          latex: "\\eta",
+        },
+        {
+          latex: "\\gamma",
+        },
+        {
+          latex: "\\iota",
+        },
+        {
+          latex: "\\kappa",
+        },
+        {
+          latex: "\\lambda",
+        },
+        {
+          latex: "\\mu",
+        },
+        {
+          latex: "\\nu",
+        },
+        {
+          latex: "o",
+        },
+        {
+          latex: "\\omega",
+        },
+        {
+          latex: "\\phi",
+        },
+        {
+          latex: "\\pi",
+        },
+        {
+          latex: "\\psi",
+        },
+        {
+          latex: "\\rho",
+        },
+        {
+          latex: "\\sigma",
+        },
+        {
+          latex: "\\tau",
+        },
+        {
+          latex: "\\theta",
+        },
+        {
+          latex: "\\upsilon",
+        },
+        {
+          latex: "\\xi",
+        },
+        {
+          latex: "\\zeta",
+        },
+        {
+          latex: "\\Delta",
+        },
+        {
+          latex: "\\Gamma",
+        },
+        {
+          latex: "\\Lambda",
+        },
+        {
+          latex: "\\Omega",
+        },
+        {
+          latex: "\\Phi",
+        },
+        {
+          latex: "\\Pi",
+        },
+        {
+          latex: "\\Psi",
+        },
+        {
+          latex: "\\Sigma",
+        },
+        {
+          latex: "\\Theta",
+        },
+        {
+          latex: "\\Upsilon",
+        }],
+      binary: [
+        {
+          latex: "\\ast"
+        },
+        {
+          latex: "\\times"
+        },
+        {
+          latex: "\\div"
+        },
+        {
+          latex: "\\cdot"
+        },
+        {
+          latex: "\\equiv"
+        },
+        {
+          latex: "\\cong"
+        },
+        {
+          latex: "\\ne"
+        },
+        {
+          latex: "\\sim"
+        },
+        {
+          latex: "\\simeq"
+        },
+        {
+          latex: "\\approx"
+        },
+        {
+          latex: "\\propto"
+        },
+        {
+          latex: "\\models"
+        },
+        // {
+        //   latex: "\\approxeq"
+        // },
+        {
+          latex: "\\pm"
+        },
+        {
+          latex: "\\mp"
+        },
+        {
+          latex: "\\leq"
+        },
+        {
+          latex: "\\ll"
+        },
+        {
+          latex: "\\subset"
+        },
+        {
+          latex: "\\subseteq"
+        },
+        {
+          latex: "\\in"
+        },
+        {
+          latex: "\\perp"
+        },
+        {
+          latex: "\\mid"
+        },
+        {
+          latex: "\\parallel"
+        },
+        {
+          latex: "\\notin"
+        },
+        {
+          latex: "\\cap"
+        },
+        {
+          latex: "\\cup"
+        },
+        {
+          latex: "\\geq"
+        },
+        {
+          latex: "\\wedge"
+        },
+        {
+          latex: "\\vee"
+        },
+        {
+          latex: "\\gg"
+        },
+        {
+          latex: "\\supset"
+        },
+        {
+          latex: "\\supseteq"
+        }
+      ],
+      arrow: [
+        {
+          latex: "\\leftarrow"
+        },
+        {
+          latex: "\\Leftarrow"
+        },
+        {
+          latex: "\\rightarrow"
+        },
+        {
+          latex: "\\Rightarrow"
+        },
+        {
+          latex: "\\leftrightarrow"
+        },
+        {
+          latex: "\\Leftrightarrow"
+        },
+        // {
+        //   latex: "\\dashrightarrow"
+        // },
+        // {
+        //   latex: "\\leftrightarrows"
+        // },
+        // {
+        //   latex: "\\rightleftharpoons"
+        // },
+        {
+          latex: "\\rightharpoonup"
+        },
+        {
+          latex: "\\rightharpoondown"
+        },
+        // {
+        //   latex: "\\dashleftarrow"
+        // },
+        // {
+        //   latex: "\\leftrightharpoons"
+        // }
+      ],
+      misc: [
+        {
+          latex: "\\infty"
+        },
+        {
+          latex: "\\nabla"
+        },
+        {
+          latex: "\\partial"
+        },
+        {
+          latex: "\\angle"
+        },
+        {
+          latex: "\\triangle"
+        },
+        {
+          latex: "\\square"
+        }
+      ]
+    };
+    $scope.symbolGroup = 'all';
+
+    $scope.equations = {
+      trig: [
+        {
+          latex: "\\cos\\theta"
+        },
+        {
+          latex: "\\csc"
+        },
+        {
+          latex: "\\lg"
+        },
+        {
+          latex: "\\ln"
+        },
+        {
+          latex: "\\cot"
+        },
+        {
+          latex: "\\lim_{x\\to\\infty}\\left(\\right)",
+          latexDisplay: "lim"
+        },
+        {
+          latex: "\\log"
+        },
+        {
+          latex: "\\sec"
+        },
+        {
+          latex: "\\tan"
+        },
+        {
+          latex: "\\dim"
+        },
+        {
+          latex: "\\sin"
+        }
+      ],
+      supsub: [
+        {
+          latex: "x^2",
+          latexDisplay: "x^2"
+        },
+        {
+          latex: "e^{ }",
+          latexDisplay: "e^{\\square}"
+        },
+        {
+          latex: "{ }^{ }",
+          latexDisplay: "\\square^\\square"
+        },
+        {
+          latex: "x_2",
+          latexDisplay: "x_2"
+        },
+        {
+          latex: "{ }_{ }",
+          latexDisplay: "\\square_\\square"
+        },
+      ],
+      root: [
+        {
+          latexCmd: "\\sqrt",
+          latexDisplay: "\\sqrt{\\square}"
+        },
+        {
+          latexCmd: "\\nthroot",
+          latexDisplay: "\\sqrt[\\square]{\\square}"
+        }
+      ],
+      frac: [
+        {
+          latex: "\\frac{ }{ }",
+          latexDisplay: "\\frac{\\square}{\\square}"
+        }
+      ]
+    };
+    $scope.equationGroup = 'all';
+
 
     var MQ = MathQuill.getInterface(2); // eslint-disable-line no-undef
     $scope.valid = false;
-    $scope.symbolType = _.uniqBy($scope.symbols, function(symbol) { return symbol.type; });
-    $scope.equationType = _.uniqBy($scope.equations, function(equation) { return equation.type; });
+
+    $scope.equationType = _.uniqBy($scope.equations, function (equation) {
+      return equation.type;
+    });
     $scope.symbolsDivision = {};
     $scope.equationsDivision = {};
     $scope.latexDivision = {};
 
-    _.each($scope.symbolType, function(value, key) {
+    _.each($scope.symbolType, function (value, key) {
       $scope.symbolsDivision[value.type] = [];
       $scope.latexDivision[value.type] = [];
-      _.each($scope.symbols, function(val, key) {
+      _.each($scope.symbols, function (val, key) {
         if (value.type == val.type) {
           $scope.symbolsDivision[value.type].push(val);
           $scope.latexDivision[val.type].push(val);
@@ -506,49 +419,57 @@ angular.module('org.ekstep.mathtext', [])
       });
     });
 
-    _.each($scope.equationType, function(value, key) {
+    _.each($scope.equationType, function (value, key) {
       $scope.equationsDivision[value.type] = [];
-      _.each($scope.equations, function(val, key) {
+      _.each($scope.equations, function (val, key) {
         if (value.type == val.type) {
           $scope.equationsDivision[value.type].push(val);
         }
       });
     });
 
-    $scope.symbolsDropDown = $scope.symbolsDivision;
+    $scope.mergeAllSymbols = function () {
+      return _.union($scope.symbols.greek, $scope.symbols.binary, $scope.symbols.arrow, $scope.symbols.misc);
+    };
+
+    $scope.symbolsDropDown = $scope.mergeAllSymbols();
     $scope.equationsDropDown = $scope.equationsDivision;
     $scope.latexDropDown = $scope.latexDivision;
 
     $scope.instance = instance;
 
-    $scope.$on('ngDialog.opened', function(e, $dialog) {
+    $scope.$on('ngDialog.opened', function (e, $dialog) {
       var currentScope = e.currentScope;
-      if(currentScope.instance.mode === currentScope.instance.modes.integration) {
-        if(currentScope.instance.textSelected) {
+      if (currentScope.instance.mode === currentScope.instance.modes.integration) {
+        if (currentScope.instance.textSelected) {
           $timeout(function () {
             $scope.selectedText = currentScope.instance.textSelected;
-            $scope.latexToEquations(currentScope.instance.latex);
+            $scope.latexToEquations({latex: currentScope.instance.latex});
           }, 500);
         }
       } else {
-        var mathTextElement = document.getElementsByClassName('mathtextEditor_1');
-        mathTextElement = mathTextElement[0];
         $scope.selectedText = false;
         var textObj = ecEditor.getCurrentObject();
         if (currentScope.ngDialogData && currentScope.ngDialogData.textSelected && textObj) {
           $scope.selectedText = true;
           $timeout(function () {
-            $scope.latexToEquations(textObj.config.latex);
+            $scope.latexToEquations({latex: textObj.config.latex});
           }, 500);
         }
       }
       $scope.instanceId = currentScope.ngDialogData.instanceId;
+      $timeout(function () {
+        $('.mq-render').each(function (index, element) {
+          MQ.StaticMath(element);
+        });
+      }, 1000);
+
     });
 
-    $timeout(function() {
+    $timeout(function () {
       $('.menu .item').tab();
       $('.ui.dropdown.latex-dropdown').dropdown({
-        onChange: function(val, text, $choice) {
+        onChange: function (val, text, $choice) {
           $scope.latexDropDown = $scope.latexDivision;
           if (val != "all") {
             $scope.latexDropDown = {};
@@ -558,7 +479,7 @@ angular.module('org.ekstep.mathtext', [])
         }
       });
       $('.ui.dropdown.equations-dropdown').dropdown({
-        onChange: function(val, text, $choice) {
+        onChange: function (val, text, $choice) {
           $scope.equationsDropDown = $scope.equationsDivision;
           if (val != "all") {
             $scope.equationsDropDown = {};
@@ -568,8 +489,8 @@ angular.module('org.ekstep.mathtext', [])
         }
       });
       $('.ui.dropdown.symbols-dropdown').dropdown({
-        onChange: function(val, text, $choice) {
-          $scope.symbolsDropDown = $scope.symbolsDivision;
+        onChange: function (val, text, $choice) {
+          $scope.symbolsDropDown = $scope.mergeAllSymbols();
           if (val != "all") {
             $scope.symbolsDropDown = {};
             $scope.symbolsDropDown[text] = $scope.symbolsDivision[text];
@@ -579,25 +500,26 @@ angular.module('org.ekstep.mathtext', [])
       });
     }, 1000);
 
-    $timeout(function() {
+    $timeout(function () {
       var mathFieldSpan = document.getElementById('math-field');
       latexSpan = document.getElementById('latex');
       hiddenSpanArea = document.getElementById('hiddenSpan');
       mathField = MQ.MathField(mathFieldSpan, {
         spaceBehavesLikeTab: true,
         handlers: {
-          edit: function() {
+          edit: function () {
             $scope.valid = true;
             latexSpan.textContent = mathField.latex();
           }
         }
       });
-      $(mathFieldSpan).keydown(function(e) {
+      window.mathField = mathField;
+      $(mathFieldSpan).keydown(function (e) {
         if (e.keyCode == 86) { //keycode value for "v"
-          $timeout(function() {
+          $timeout(function () {
             if (!$scope.valid) { // checks if the pasted value is not valid
               ecEditor.dispatchEvent("org.ekstep.toaster:error", {
-                title: 'Wrong La Tex. Please change the latex...',
+                title: 'Incorrect formula entered.',
                 position: 'topCenter',
               });
             }
@@ -607,23 +529,32 @@ angular.module('org.ekstep.mathtext', [])
     }, 300);
 
 
-    $scope.latexToEquations = function(latex) {
-      mathField.write(latex);
+    $scope.latexToEquations = function (object) {
+      if(object.latexCmd) {
+        mathField.cmd(object.latexCmd);
+      } else {
+        mathField.write(object.latex);
+      }
     };
 
-    $scope.latexToFormula = function(id, latex) {
+    $scope.latexToFormula = function (id, latex) {
       var mathDiv = document.getElementById(id);
-      katex.render(latex, mathDiv, { displayMode: true }); // eslint-disable-line no-undef
+      katex.render(latex, mathDiv, {displayMode: true}); // eslint-disable-line no-undef
     };
 
-    $scope.addToStage = function() {
+    // Some latex are not rendered correctly by katex. Use mathquill in those cases.
+    $scope.latexToFormulaMQ = function(id) {
+      var field = document.getElementById(id);
+      MQ.StaticMath(field);
+    };
+
+    $scope.addToStage = function () {
       var equation = document.getElementById('latex').innerHTML;
-      if(instance.mode === instance.modes.integration) {
+      if (instance.mode === instance.modes.integration) {
         instance.callbackFn(equation, instance.textSelected);
       } else {
         // Convert the latex or mathquill to equation
         // add it to the stage
-        // $(".mq-textarea").remove();
         if ($scope.selectedText && $scope.instanceId) {
           ecEditor.dispatchEvent('org.ekstep.mathtext:edit', {
             instanceId: $scope.instanceId,

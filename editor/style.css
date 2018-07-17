@@ -41,6 +41,7 @@
   min-width: 100%;
   padding: 2px 10px;
   border-radius: 3px;
+  min-height: 35px;
 }
 
 .ui.secondary.menu.math-tab-head {
@@ -77,7 +78,7 @@
 .ui.items>.item.math-lib,
 .math-symbol,
 .math-latex-div {
-  border: 1px solid #fff;
+  border: 1px solid transparent;
 }
 
 .ui.items>.item.math-lib:hover,

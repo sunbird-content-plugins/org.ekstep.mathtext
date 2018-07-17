@@ -5,76 +5,81 @@
   "type": "plugin",
   "title": "mathtext",
   "description": "Math text standalone plugin",
-  "editor":
-  {
+  "editor": {
     "main": "editor/plugin.js",
     "dependencies": [
-    {
-      "type": "js",
-      "src": "editor/lib/mathquill/mathquill.min.js"
-    },
-    {
-      "type": "css",
-      "src": "editor/lib/mathquill/mathquill.css"
-    },
-    {
-      "type": "js",
-      "src": "editor/lib/katex/katex.min.js"
-    },
-     {
+      {
+        "type": "js",
+        "src": "editor/lib/mathquill/mathquill.min.js"
+      },
+      {
+        "type": "css",
+        "src": "editor/lib/mathquill/mathquill.css"
+      },
+      {
+        "type": "js",
+        "src": "editor/lib/katex/katex.min.js"
+      },
+      {
         "type": "js",
         "src": "editor/mathtext.js"
       },
-    {
-      "type": "css",
-      "src": "editor/lib/katex/katex.min.css"
-    },
-    {
-      "type": "css",
-      "src": "editor/style.css"
-    }],
-    "menu": [
-    {
-      "id": "math-text",
-      "category": "main",
-      "type": "image",
-      "toolTip": "Add Math text",
-      "title": "Question Set",
-      "iconImage": "assets/sigma.png",
-      "onclick":
       {
-        "id": "org.ekstep.mathtext:showpopup"
+        "type": "css",
+        "src": "editor/lib/katex/katex.min.css"
+      },
+      {
+        "type": "css",
+        "src": "editor/style.css"
       }
-    }],
-    "init-data":
-    {},
-     "configManifest": [
-        {
-            "type": "custom_template",
-            "controllerURL": "editor/config-controller.js",
-            "templateURL": "editor/config-template.html"
-        }],
-    "help":
-    {
+    ],
+    "menu": [
+      {
+        "id": "math-text",
+        "category": "main",
+        "type": "image",
+        "toolTip": "Add Math text",
+        "title": "Question Set",
+        "iconImage": "assets/sigma.png",
+        "onclick": {
+          "id": "org.ekstep.mathtext:showpopup"
+        }
+      }
+    ],
+    "init-data": {},
+    "configManifest": [
+      {
+        "type": "custom_template",
+        "controllerURL": "editor/config-controller.js",
+        "templateURL": "editor/config-template.html"
+      }
+    ],
+    "help": {
       "src": "editor/help.md",
       "dataType": "text"
     }
   },
-  "renderer":
-  {
+  "renderer": {
     "main": "renderer/plugin.js",
     "dependencies": [
-    {
-      "type": "js",
-      "src": "renderer/libs/katex.min.js"
-    },
-    {
-      "type": "css",
-      "src": "renderer/libs/katex.min.css"
-    }]
+      {
+        "type": "js",
+        "src": "renderer/libs/katex.min.js"
+      },
+      {
+        "type": "css",
+        "src": "renderer/libs/katex.min.css"
+      }
+    ]
   },
   "icon": "assets/icon.png",
-  "languages": ["English"],
-  "categories": [""],
-  "keywords": [""]
+  "languages": [
+    "English"
+  ],
+  "categories": [
+    ""
+  ],
+  "keywords": [
+    ""
+  ]
 }
