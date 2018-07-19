@@ -322,10 +322,26 @@ angular.module('org.ekstep.mathtext', [])
     $scope.equations = {
       trig: [
         {
+          latex: "\\sin\\theta"
+        },
+        {
           latex: "\\cos\\theta"
         },
         {
-          latex: "\\csc"
+          latex: "\\sec\\theta"
+        },
+        {
+          latex: "\\csc\\theta"
+        },
+        {
+          latex: "\\tan\\theta"
+        },
+        {
+          latex: "\\cot\\theta"
+        },
+        {
+          latex: "\\log_{}\\left(\\right)",
+          latexDisplay: "\\log_{\\square}"
         },
         {
           latex: "\\lg"
@@ -334,26 +350,11 @@ angular.module('org.ekstep.mathtext', [])
           latex: "\\ln"
         },
         {
-          latex: "\\cot"
-        },
-        {
           latex: "\\lim_{x\\to\\infty}\\left(\\right)",
           latexDisplay: "lim"
         },
         {
-          latex: "\\log"
-        },
-        {
-          latex: "\\sec"
-        },
-        {
-          latex: "\\tan"
-        },
-        {
           latex: "\\dim"
-        },
-        {
-          latex: "\\sin"
         }
       ],
       supsub: [

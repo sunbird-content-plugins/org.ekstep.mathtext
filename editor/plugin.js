@@ -125,8 +125,6 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
       }
     }
     ecEditor.render();
-    // ecEditor.dispatchEvent("org.ekstep.mathtext:adddiv", { data: elem });
-
   },
 
   /**
@@ -237,7 +235,7 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
    */
   render: function(canvas) {
     canvas.add(this.editorObj);
-    ecEditor.dispatchEvent(this.manifest.id + ":adddiv", { data: this });
+    ecEditor.dispatchEvent(this.manifest.id + ":adddiv", this);
   },
 
   dblClickHandler: function(event) {
