@@ -53,6 +53,9 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
       if(ecEditor._.isString(data.latex)) {
         this.latex = data.latex;
       }
+    } else {
+      this.mode = this.modes.standalone;
+      this.callbackFn = null;
     }
     if (document.getElementsByClassName('mathtextEditor_1').length > 0) { return }; // Dont open popup if already opened
     if(data) {
@@ -91,43 +94,41 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
   },
 
   onConfigChange : function(event, obj){
-      var elem = ecEditor.getCurrentObject();
-      var div = ecEditor.jQuery("div#" + elem.id);
-    
-      if (obj.configData) {
-        if (obj.configData.fontSize) {
-          elem.editorObj.fontSize = obj.configData.fontSize;
-          elem.attributes.fontSize = obj.configData.fontSize;
-          div.css('fontSize', obj.configData.fontSize + 'px');
-          div.css('width', "auto");
-          div.css('height', "auto");
-          var width = div.width();
-          var height = div.height();
-          elem.editorObj.width = width;
-          elem.attributes.w = width;
-          elem.editorObj.height = height;
-          elem.attributes.h = height;
-          div.css('width', width);
-          div.css('height', height);
-        }
-        if(obj.configData.color){
-          elem.editorObj.color = obj.configData.color;
-          elem.attributes.color = obj.configData.color;
-          div.css('color', obj.configData.color);
-        }
-        if(obj.configData.backgroundcolor){
-          elem.editorObj.backgroundcolor = obj.configData.backgroundcolor;
-          elem.attributes.backgroundcolor = obj.configData.backgroundcolor;
-          div.css('background-color', obj.configData.backgroundcolor);
-        }
-      }
-      ecEditor.render();
-      // ecEditor.dispatchEvent("org.ekstep.mathtext:adddiv", { data: elem });
+    var elem = ecEditor.getCurrentObject();
+    var div = ecEditor.jQuery("div#" + elem.id);
 
+    if (obj.configData) {
+      if (obj.configData.fontSize) {
+        elem.editorObj.fontSize = obj.configData.fontSize;
+        elem.attributes.fontSize = obj.configData.fontSize;
+        div.css('fontSize', obj.configData.fontSize + 'px');
+        div.css('width', "auto");
+        div.css('height', "auto");
+        var width = div.width();
+        var height = div.height();
+        elem.editorObj.width = width;
+        elem.attributes.w = width;
+        elem.editorObj.height = height;
+        elem.attributes.h = height;
+        div.css('width', width);
+        div.css('height', height);
+      }
+      if(obj.configData.color){
+        elem.editorObj.color = obj.configData.color;
+        elem.attributes.color = obj.configData.color;
+        div.css('color', obj.configData.color);
+      }
+      if(obj.configData.backgroundcolor){
+        elem.editorObj.backgroundcolor = obj.configData.backgroundcolor;
+        elem.attributes.backgroundcolor = obj.configData.backgroundcolor;
+        div.css('background-color', obj.configData.backgroundcolor);
+      }
+    }
+    ecEditor.render();
   },
 
   /**
-   * Resize the mathtext element 
+   * Resize the mathtext element
    * @memberof mathtext
    */
   resizeObject: function(e) {
@@ -234,7 +235,7 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
    */
   render: function(canvas) {
     canvas.add(this.editorObj);
-    ecEditor.dispatchEvent(this.manifest.id + ":adddiv", { data: this });
+    ecEditor.dispatchEvent(this.manifest.id + ":adddiv", this);
   },
 
   dblClickHandler: function(event) {
