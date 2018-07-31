@@ -509,7 +509,6 @@ angular.module('org.ekstep.mathtext', [])
         spaceBehavesLikeTab: true,
         handlers: {
           edit: function () {
-            $scope.valid = true;
             latexSpan.textContent = mathField.latex();
           }
         }
