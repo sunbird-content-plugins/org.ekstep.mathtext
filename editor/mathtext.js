@@ -423,6 +423,14 @@ angular.module('org.ekstep.mathtext', [])
         {
           latexCmd: "\\nthroot",
           latexDisplay: "\\sqrt[\\square]{\\square}"
+        },
+        {
+          latex: "\\sqrt[3]{}",
+          latexDisplay: "\\sqrt[3]{a}"
+        },
+        {
+          latex: "\\sqrt[4]{}",
+          latexDisplay: "\\sqrt[4]{a}"
         }
       ],
       frac: [
@@ -451,6 +459,9 @@ angular.module('org.ekstep.mathtext', [])
         {
           latex: "_n C^k",
           latexDisplay: "_n C^k"
+        },
+        {
+          latex: "\\binom{n}{k}"
         }
       ]
     };

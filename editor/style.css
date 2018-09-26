@@ -155,8 +155,9 @@
 .symbol-latex{
   position: absolute;
   bottom: -8px;
-  left: 29%;
+  left: 0;
   display: none;
+  min-width: 130px;
 }
 
 .symbol-div:hover .symbol-latex{
