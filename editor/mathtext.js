@@ -253,6 +253,9 @@ angular.module('org.ekstep.mathtext', [])
         },
         {
           latex: "\\supseteq"
+        },
+        {
+          latex: "a^b"
         }
       ],
       arrow: [
@@ -310,10 +313,28 @@ angular.module('org.ekstep.mathtext', [])
           latex: "\\angle"
         },
         {
+          latex: "\\measuredangle"
+        },
+        {
           latex: "\\triangle"
         },
         {
           latex: "\\square"
+        },
+        {
+          latex: "\\overrightarrow{AB}"
+        },
+        {
+          latex: "A^T"
+        },
+        {
+          latex: "A^{-1}"
+        },
+        {
+          latex: "^c"
+        },
+        {
+          latex: "^g"
         }
       ]
     };
@@ -341,7 +362,7 @@ angular.module('org.ekstep.mathtext', [])
         },
         {
           latex: "\\log_{}\\left(\\right)",
-          latexDisplay: "\\log_{\\square}"
+          latexDisplay: "\\log_{b}a"
         },
         {
           latex: "\\lg"
@@ -355,6 +376,21 @@ angular.module('org.ekstep.mathtext', [])
         },
         {
           latex: "\\dim"
+        },
+        {
+          latex: "y^{(n)}"
+        },
+        {
+          latex: "\\frac{dy}{dx}"
+        },
+        {
+          latex: "\\frac{d^2y}{dx^2}"
+        },
+        {
+          latex: "\\frac{d^ny}{dx^n}"
+        },
+        {
+          latex: "\\frac{\\partial f(x,y)}{\\partial x}"
         }
       ],
       supsub: [
@@ -377,7 +413,7 @@ angular.module('org.ekstep.mathtext', [])
         {
           latex: "{ }_{ }",
           latexDisplay: "\\square_\\square"
-        },
+        }
       ],
       root: [
         {
@@ -393,6 +429,28 @@ angular.module('org.ekstep.mathtext', [])
         {
           latex: "\\frac{ }{ }",
           latexDisplay: "\\frac{\\square}{\\square}"
+        }
+      ],
+      misc: [
+        {
+          latex: "\\sigma^2",
+          latexDisplay: "\\sigma^2"
+        },
+        {
+          latex: "\\sigma_X",
+          latexDisplay: "\\sigma_X"
+        },
+        {
+          latex: "\\rho_{X,Y}",
+          latexDisplay: "\\rho_{X,Y}"
+        },
+        {
+          latex: "_n P^k",
+          latexDisplay: "_n P^k"
+        },
+        {
+          latex: "_n C^k",
+          latexDisplay: "_n C^k"
         }
       ]
     };
