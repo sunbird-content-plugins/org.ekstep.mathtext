@@ -313,7 +313,7 @@ angular.module('org.ekstep.mathtext', [])
           latex: "\\angle"
         },
         {
-          latex: "\\measuredangle"
+          latex: "\\measured angle"
         },
         {
           latex: "\\triangle"
