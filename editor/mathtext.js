@@ -256,6 +256,18 @@ angular.module('org.ekstep.mathtext', [])
         },
         {
           latex: "a^b"
+        },
+        {
+          latex: "\\lt"
+        },
+        {
+          latex: "\\gt"
+        },
+        {
+          latex: "\\+"
+        },
+        {
+          latex: "\\-"
         }
       ],
       arrow: [
@@ -313,7 +325,7 @@ angular.module('org.ekstep.mathtext', [])
           latex: "\\angle"
         },
         {
-          latex: "\\measured angle"
+          latex: "\\measuredangle"
         },
         {
           latex: "\\triangle"
@@ -335,6 +347,15 @@ angular.module('org.ekstep.mathtext', [])
         },
         {
           latex: "^g"
+        },
+        {
+          latex: "\\overline{x}"
+        },
+        {
+          latex: "\\vec{x}"
+        },
+        {
+          latex: "\\hat{x}"
         }
       ]
     };
@@ -617,8 +638,15 @@ angular.module('org.ekstep.mathtext', [])
       MQ.StaticMath(field);
     };
 
+    $scope.extractHTML = function(htmlElement) {
+      var divElement= document.createElement('div');
+      divElement.innerHTML= htmlElement;
+      return divElement.textContent || divElement.innerText;
+    }
+
     $scope.addToStage = function () {
-      var equation = document.getElementById('latex').innerHTML;
+      var htmlElement = document.getElementById('latex').innerHTML;
+      var equation = $scope.extractHTML(htmlElement);
       if (instance.mode === instance.modes.integration) {
         instance.callbackFn(equation, instance.textSelected);
       } else {
