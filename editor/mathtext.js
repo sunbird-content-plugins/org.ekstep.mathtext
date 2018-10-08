@@ -391,6 +391,15 @@ angular.module('org.ekstep.mathtext', [])
         },
         {
           latex: "\\frac{\\partial f(x,y)}{\\partial x}"
+        },
+        {
+          latex: "\\int "
+        },
+        {
+          latex: "\\int _{ }^{ }"
+        },
+        {
+          latex: "\oint"
         }
       ],
       supsub: [
