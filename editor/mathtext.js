@@ -582,7 +582,8 @@ angular.module('org.ekstep.mathtext', [])
         if (currentScope.ngDialogData && currentScope.ngDialogData.textSelected && textObj) {
           $scope.selectedText = true;
           $timeout(function () {
-            $scope.latexToEquations({latex: textObj.config.latex});
+            $scope.advanceField = textObj.config.latextType == 'advance' ? true : false;
+            $scope.latexToEquations({latex: textObj.config.latex,type:textObj.config.latextType});
           }, 500);
         }
       }
@@ -717,13 +718,16 @@ angular.module('org.ekstep.mathtext', [])
     }
 
     $scope.addToStage = function (activeTab) {
-      var equation;
+      var equation,latextType;
       if(!$scope.advanceField){
         var htmlElement = document.getElementById('latex').innerHTML;
         equation = $scope.extractHTML(htmlElement);
+        latextType = 'normal';
+
       }
       else {
         equation = $scope.latexValue;
+        latextType = 'advance';
       }
       if (instance.mode === instance.modes.integration) {
         instance.callbackFn(equation, instance.textSelected);
@@ -733,11 +737,13 @@ angular.module('org.ekstep.mathtext', [])
         if ($scope.selectedText && $scope.instanceId) {
           ecEditor.dispatchEvent('org.ekstep.mathtext:edit', {
             instanceId: $scope.instanceId,
-            latex: equation
+            latex: equation,
+            type: latextType
           });
         } else {
           ecEditor.dispatchEvent('org.ekstep.mathtext:create', {
             "latex": equation,
+            "latextType": latextType,
             "type": "rect",
             "x": 10,
             "y": 20,

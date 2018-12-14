@@ -84,9 +84,12 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
       return property.propertyName != "stroke";
     });
     var props = this.convertToFabric(this.attributes);
-    if (ecEditor._.isUndefined(this.config.text))
+    if (ecEditor._.isUndefined(this.config.text)){
       this.config.latex = ecEditor._.isUndefined(this.attributes.latex) ? "" : this.attributes.latex;
+      this.config.latextType = ecEditor._.isUndefined(this.attributes.latextType) ? "" : this.attributes.latextType;
+    }
     delete props.latex;
+    delete props.latextType;
     this.editorObj = new fabric.Rect(props);
     this.editorObj.visible = true;
     if (this.editorObj) this.editorObj.setFill(props.fill);
