@@ -520,6 +520,7 @@ angular.module('org.ekstep.mathtext', [])
       }
     ]
     $scope.equationGroup = 'all';
+    $scope.advanceField = false;
     $scope.advancedImageArray = [];
     var MQ = MathQuill.getInterface(2); // eslint-disable-line no-undef
     $scope.valid = false;
@@ -597,6 +598,20 @@ angular.module('org.ekstep.mathtext', [])
     $timeout(function () {
       $('.menu .item').tab({
         onVisible: function (e) {
+          if(e == 'advanced'){
+            $scope.advanceField = true;
+          }
+          // before tab swiched
+          if(e != 'advanced' && $scope.activeTab == 'advanced'){
+            window.mathField.write(object.latex);
+            if(!_.isEmpty(mathField.latex())){
+              $scope.latexValue = latex;              
+              $scope.advanceField = true;
+            }
+            else{
+              $scope.advanceField = false;
+            }
+          }
           $scope.activeTab = e;
           $scope.$safeApply();
          }
@@ -649,7 +664,7 @@ angular.module('org.ekstep.mathtext', [])
       });
       window.mathField = mathField;
       $(mathFieldSpan).keydown(function (e) {
-        if (e.keyCode == 86) { //keycode value for "v"
+        if (e.keyCode == 86 || e.keycode == 13) { //keycode value for "v"
           $timeout(function () {
             if (!$scope.valid) { // checks if the pasted value is not valid
               ecEditor.dispatchEvent("org.ekstep.toaster:error", {
@@ -663,14 +678,24 @@ angular.module('org.ekstep.mathtext', [])
       });
     }, 300);
 
-
-    $scope.latexToEquations = function (object) {
-      if(object.latexCmd) {
-        mathField.cmd(object.latexCmd);
-      } else if(object.latex){
-        mathField.write(object.latex);
-      } else{
-        $scope.latexValue = $scope.latexValue + object.latexText;
+    $scope.latexToEquations = function (object, callbackFn) {
+      if($scope.advanceField){
+        if(object.latexCmd) {
+          $scope.latexValue = $scope.latexValue + object.latexCmd;
+        } else if(object.latex){
+          $scope.latexValue = $scope.latexValue + object.latex;
+        } else{
+          $scope.latexValue = $scope.latexValue + object.latexText;
+        }
+      }
+      else{
+        if(object.latexCmd) {
+          mathField.cmd(object.latexCmd);
+        } else if(object.latex){
+          mathField.write(object.latex);
+        } else{
+          $scope.latexValue = $scope.latexValue + object.latexText;
+        }
       }
     };
 
@@ -691,13 +716,9 @@ angular.module('org.ekstep.mathtext', [])
       return divElement.textContent || divElement.innerText;
     }
 
-    $scope.process_latex = function() {
-      
-    }
-
     $scope.addToStage = function (activeTab) {
       var equation;
-      if(activeTab != 'advanced'){
+      if(!$scope.advanceField){
         var htmlElement = document.getElementById('latex').innerHTML;
         equation = $scope.extractHTML(htmlElement);
       }

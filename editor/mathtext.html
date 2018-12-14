@@ -144,13 +144,13 @@
     </div>
     <div class="actions math-footer">
       <div class="ui two column grid">
-        <div class="ui nine wide column math-formula"  ng-show="activeTab != 'advanced'">
+        <div class="ui nine wide column math-formula"  ng-show="!advanceField">
           <span id="math-field"></span>
           <span id="latex"></span>
         </div>
 
-        <div class="ui nine wide column math-formula" ng-show="activeTab == 'advanced'">
-          <input type="textarea" class="latex-field" ng-model="latexValue">
+        <div class="ui nine wide column math-formula" ng-show="advanceField">
+          <input id="advInput" type="textarea" class="latex-field" ng-model="latexValue">
         </div>
 
         <div class="ui three wide column right aligned math-add-button-div">
