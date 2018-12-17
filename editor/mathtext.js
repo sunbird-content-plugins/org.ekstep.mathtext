@@ -606,9 +606,13 @@ angular.module('org.ekstep.mathtext', [])
           }
           // before tab swiched
           if(e != 'advanced' && $scope.activeTab == 'advanced'){
-            window.mathField.write($scope.latexValue);
-            if(!_.isEmpty(mathField.latex())){
-              $scope.latexValue = $scope.latexValue;              
+            $scope.advanceField = false;
+            $scope.$safeApply();
+            var latexVal = $scope.latexValue;
+            mathField.latex('');
+            mathField.write(latexVal);
+            if(_.isEmpty(mathField.latex())){
+              $scope.latexValue = latexVal;              
               $scope.advanceField = true;
             }
             else{
