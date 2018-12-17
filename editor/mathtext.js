@@ -8,7 +8,8 @@ angular.module('org.ekstep.mathtext', [])
 
     var mathField, latex, latexSpan, hiddenSpanArea;
     $scope.isMathWysiwyg = true;
-    $scope.latexValue = '';
+    $scope.latexValue = ''; 
+    $scope.cursorPosition = undefined;
     $scope.libraryEquations = [
       {
         "title": "Area of circle",
@@ -605,9 +606,9 @@ angular.module('org.ekstep.mathtext', [])
           }
           // before tab swiched
           if(e != 'advanced' && $scope.activeTab == 'advanced'){
-            window.mathField.write(object.latex);
+            window.mathField.write($scope.latexValue);
             if(!_.isEmpty(mathField.latex())){
-              $scope.latexValue = latex;              
+              $scope.latexValue = $scope.latexValue;              
               $scope.advanceField = true;
             }
             else{
@@ -681,13 +682,14 @@ angular.module('org.ekstep.mathtext', [])
     }, 300);
 
     $scope.latexToEquations = function (object, callbackFn) {
+      var cursorPosition = !_.isUndefined($scope.cursorPosition) ? $scope.cursorPosition : $scope.latexValue.length;
       if($scope.advanceField){
         if(object.latexCmd) {
-          $scope.latexValue = $scope.latexValue + object.latexCmd;
+          $scope.latexValue = $scope.latexValue.substr(0, cursorPosition) + object.latexValue + $scope.latexValue.substr(cursorPosition);
         } else if(object.latex){
-          $scope.latexValue = $scope.latexValue + object.latex;
+          $scope.latexValue = $scope.latexValue.substr(0, cursorPosition) + object.latex + $scope.latexValue.substr(cursorPosition);
         } else{
-          $scope.latexValue = $scope.latexValue + object.latexText;
+          $scope.latexValue = $scope.latexValue.substr(0, cursorPosition) + object.latexText + $scope.latexValue.substr(cursorPosition);
         }
       }
       else{
@@ -696,7 +698,7 @@ angular.module('org.ekstep.mathtext', [])
         } else if(object.latex){
           mathField.write(object.latex);
         } else{
-          $scope.latexValue = $scope.latexValue + object.latexText;
+          $scope.latexValue = $scope.latexValue.substr(0, cursorPosition) + object.latexText + $scope.latexValue.substr(cursorPosition);
         }
       }
     };
@@ -716,6 +718,10 @@ angular.module('org.ekstep.mathtext', [])
       var divElement= document.createElement('div');
       divElement.innerHTML= htmlElement;
       return divElement.textContent || divElement.innerText;
+    }
+
+    $scope.getCursorPosition = function(e){
+      $scope.cursorPosition = e.target.selectionStart;
     }
 
     $scope.addToStage = function (activeTab) {
