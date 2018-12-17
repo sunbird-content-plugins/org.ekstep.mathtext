@@ -130,7 +130,10 @@
         </div>
         <div class="ui tab segment math-tab" data-tab="advanced">
           <div class="ui grid">
-            <div class="sixteen wide column">Advanced symbols and equations</div>
+            <div class="sixteen wide column">Advanced symbols and equations 
+              <a href="https://katex.org/docs/supported.html" target="_blank"><i class="info circle icon"></i>
+              </a>
+            </div>
             <div class="four wide column math-symbols" ng-repeat="symbol in advancedSymbols">
               <span class="advanc-symbol-div">
                 <div class="math-symbol" id="advan{{$index}}" ng-click="latexToEquations(symbol);">
