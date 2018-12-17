@@ -10,6 +10,7 @@ angular.module('org.ekstep.mathtext', [])
     $scope.isMathWysiwyg = true;
     $scope.latexValue = ''; 
     $scope.cursorPosition = undefined;
+    $scope.text_hint = true;
     $scope.libraryEquations = [
       {
         "title": "Area of circle",
@@ -603,6 +604,9 @@ angular.module('org.ekstep.mathtext', [])
         onVisible: function (e) {
           if(e == 'advanced'){
             $scope.advanceField = true;
+            $scope.text_hint = false;
+          }else{
+            $scope.text_hint = true;
           }
           // before tab swiched
           if(e != 'advanced' && $scope.activeTab == 'advanced'){
