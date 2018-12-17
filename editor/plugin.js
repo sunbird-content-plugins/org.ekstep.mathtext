@@ -52,6 +52,7 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
       this.callbackFn = data.callback;
       if(ecEditor._.isString(data.latex)) {
         this.latex = data.latex;
+        this.advance = data.advance == "true" ? true : false;
       }
     } else {
       this.mode = this.modes.standalone;
@@ -86,10 +87,10 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     var props = this.convertToFabric(this.attributes);
     if (ecEditor._.isUndefined(this.config.text)){
       this.config.latex = ecEditor._.isUndefined(this.attributes.latex) ? "" : this.attributes.latex;
-      this.config.latextType = ecEditor._.isUndefined(this.attributes.latextType) ? "" : this.attributes.latextType;
+      this.config.advance = this.attributes.advance;
     }
     delete props.latex;
-    delete props.latextType;
+    delete props.advance;
     this.editorObj = new fabric.Rect(props);
     this.editorObj.visible = true;
     if (this.editorObj) this.editorObj.setFill(props.fill);
@@ -225,7 +226,9 @@ org.ekstep.mathtext.EditorPlugin = org.ekstep.contenteditor.basePlugin.extend({
     this.latexToEquation(data.latex, data.instanceId);
     var pluginInstance = ecEditor.getPluginInstance(data.instanceId);
     pluginInstance.attributes['latex'] = data.latex;
+    pluginInstance.attributes['advance'] = data.advance;
     pluginInstance.config['latex'] = data.latex;
+    pluginInstance.config['advance'] = data.advance;
   },
   latexToEquation: function(mathText, id) {
     var mathDiv = document.getElementById(id);

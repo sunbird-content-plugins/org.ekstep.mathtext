@@ -572,8 +572,9 @@ angular.module('org.ekstep.mathtext', [])
       if (currentScope.instance.mode === currentScope.instance.modes.integration) {
         if (currentScope.instance.textSelected) {
           $timeout(function () {
+            $scope.advanceField = currentScope.instance.advance;
             $scope.selectedText = currentScope.instance.textSelected;
-            $scope.latexToEquations({latex: currentScope.instance.latex});
+            $scope.latexToEquations({latex: currentScope.instance.latex,advance:currentScope.instance.advance});
           }, 500);
         }
       } else {
@@ -582,8 +583,8 @@ angular.module('org.ekstep.mathtext', [])
         if (currentScope.ngDialogData && currentScope.ngDialogData.textSelected && textObj) {
           $scope.selectedText = true;
           $timeout(function () {
-            $scope.advanceField = textObj.config.latextType == 'advance' ? true : false;
-            $scope.latexToEquations({latex: textObj.config.latex,type:textObj.config.latextType});
+            $scope.advanceField = textObj.config.advance;
+            $scope.latexToEquations({latex: textObj.config.latex,advance:textObj.config.advance});
           }, 500);
         }
       }
@@ -718,19 +719,23 @@ angular.module('org.ekstep.mathtext', [])
     }
 
     $scope.addToStage = function (activeTab) {
-      var equation,latextType;
+      var equation,advance;
       if(!$scope.advanceField){
         var htmlElement = document.getElementById('latex').innerHTML;
         equation = $scope.extractHTML(htmlElement);
-        latextType = 'normal';
+        advance = false;
 
       }
       else {
         equation = $scope.latexValue;
-        latextType = 'advance';
+        advance = true;
       }
       if (instance.mode === instance.modes.integration) {
-        instance.callbackFn(equation, instance.textSelected);
+        var mathtextObj = {"latex": equation,
+                           "editMode": instance.textSelected,
+                           "advance" : advance
+                          };
+        instance.callbackFn(mathtextObj);
       } else {
         // Convert the latex or mathquill to equation
         // add it to the stage
@@ -738,12 +743,12 @@ angular.module('org.ekstep.mathtext', [])
           ecEditor.dispatchEvent('org.ekstep.mathtext:edit', {
             instanceId: $scope.instanceId,
             latex: equation,
-            type: latextType
+            advance: advance
           });
         } else {
           ecEditor.dispatchEvent('org.ekstep.mathtext:create', {
             "latex": equation,
-            "latextType": latextType,
+            "advance": advance,
             "type": "rect",
             "x": 10,
             "y": 20,
