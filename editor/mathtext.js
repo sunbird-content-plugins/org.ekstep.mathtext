@@ -8,6 +8,9 @@ angular.module('org.ekstep.mathtext', [])
 
     var mathField, latex, latexSpan, hiddenSpanArea;
     $scope.isMathWysiwyg = true;
+    $scope.latexValue = ''; 
+    $scope.cursorPosition = undefined;
+    $scope.text_hint = true;
     $scope.libraryEquations = [
       {
         "title": "Area of circle",
@@ -46,7 +49,7 @@ angular.module('org.ekstep.mathtext', [])
         "latex": "a^n\\times a^m=a^{n+m}"
       }
     ];
-
+    $scope.activeTab = "library"
     // Each object definition is:
     // {
     //   latex: <string>, // Latex string to enter into math-field on click
@@ -495,9 +498,32 @@ angular.module('org.ekstep.mathtext', [])
         }
       ]
     };
+    $scope.advancedSymbols = [
+      {
+        latexText: "\\begin{vmatrix} a&b\\\\ c&d\\\\ \\end{vmatrix}"
+      },
+      {
+        latexText: "\\begin{matrix} a&b\\\\ c&d\\\\ \\end{matrix}"
+      },
+      {
+        latexText: "\\begin{bmatrix} a&b\\\\ c&d\\\\ \\end{bmatrix}"
+      },
+      {
+        latexText: "\\xrightarrow{\\Delta}"
+      },
+      {
+        latexText: "\\sphericalangle"
+      },
+      {
+        latexText: "\\xleftrightharpoons{abc}"
+      },
+      {
+        latexText: "\\leftrightarrows"
+      }
+    ]
     $scope.equationGroup = 'all';
-
-
+    $scope.advanceField = false;
+    $scope.advancedImageArray = [];
     var MQ = MathQuill.getInterface(2); // eslint-disable-line no-undef
     $scope.valid = false;
 
@@ -528,6 +554,11 @@ angular.module('org.ekstep.mathtext', [])
       });
     });
 
+    _.each($scope.advancedSymbols, function(value,key){
+      var url = "https://latex.codecogs.com/gif.latex?" + encodeURIComponent(value.latexText);
+      $scope.advancedImageArray.push(url);
+    })
+
     $scope.mergeAllSymbols = function () {
       return _.union($scope.symbols.greek, $scope.symbols.binary, $scope.symbols.arrow, $scope.symbols.misc);
     };
@@ -543,8 +574,9 @@ angular.module('org.ekstep.mathtext', [])
       if (currentScope.instance.mode === currentScope.instance.modes.integration) {
         if (currentScope.instance.textSelected) {
           $timeout(function () {
+            $scope.advanceField = currentScope.instance.advance;
             $scope.selectedText = currentScope.instance.textSelected;
-            $scope.latexToEquations({latex: currentScope.instance.latex});
+            $scope.latexToEquations({latex: currentScope.instance.latex,advance:currentScope.instance.advance});
           }, 500);
         }
       } else {
@@ -553,7 +585,8 @@ angular.module('org.ekstep.mathtext', [])
         if (currentScope.ngDialogData && currentScope.ngDialogData.textSelected && textObj) {
           $scope.selectedText = true;
           $timeout(function () {
-            $scope.latexToEquations({latex: textObj.config.latex});
+            $scope.advanceField = textObj.config.advance;
+            $scope.latexToEquations({latex: textObj.config.latex,advance:textObj.config.advance});
           }, 500);
         }
       }
@@ -567,7 +600,33 @@ angular.module('org.ekstep.mathtext', [])
     });
 
     $timeout(function () {
-      $('.menu .item').tab();
+      $('.menu .item').tab({
+        onVisible: function (e) {
+          if(e == 'advanced'){
+            $scope.advanceField = true;
+            $scope.text_hint = false;
+          }else{
+            $scope.text_hint = true;
+          }
+          // before tab swiched
+          if(e != 'advanced' && $scope.activeTab == 'advanced'){
+            $scope.advanceField = false;
+            $scope.$safeApply();
+            var latexVal = $scope.latexValue;
+            mathField.latex('');
+            mathField.write(latexVal);
+            if(_.isEmpty(mathField.latex())){
+              $scope.latexValue = latexVal;              
+              $scope.advanceField = true;
+            }
+            else{
+              $scope.advanceField = false;
+            }
+          }
+          $scope.activeTab = e;
+          $scope.$safeApply();
+         }
+      });
       $('.ui.dropdown.latex-dropdown').dropdown({
         onChange: function (val, text, $choice) {
           $scope.latexDropDown = $scope.latexDivision;
@@ -609,12 +668,14 @@ angular.module('org.ekstep.mathtext', [])
         handlers: {
           edit: function () {
             latexSpan.textContent = mathField.latex();
+            $scope.latexValue = latexSpan.textContent;
+            $scope.valid = true;
           }
         }
       });
       window.mathField = mathField;
       $(mathFieldSpan).keydown(function (e) {
-        if (e.keyCode == 86) { //keycode value for "v"
+        if (e.keyCode == 86 || e.keycode == 13) { //keycode value for "v"
           $timeout(function () {
             if (!$scope.valid) { // checks if the pasted value is not valid
               ecEditor.dispatchEvent("org.ekstep.toaster:error", {
@@ -622,17 +683,31 @@ angular.module('org.ekstep.mathtext', [])
                 position: 'topCenter',
               });
             }
+            $scope.valid = false;
           }, 1);
         }
       });
     }, 300);
 
-
-    $scope.latexToEquations = function (object) {
-      if(object.latexCmd) {
-        mathField.cmd(object.latexCmd);
-      } else {
-        mathField.write(object.latex);
+    $scope.latexToEquations = function (object, callbackFn) {
+      var cursorPosition = !_.isUndefined($scope.cursorPosition) ? $scope.cursorPosition : $scope.latexValue.length;
+      if($scope.advanceField){
+        if(object.latexCmd) {
+          $scope.latexValue = $scope.latexValue.substr(0, cursorPosition) + object.latexValue + $scope.latexValue.substr(cursorPosition);
+        } else if(object.latex){
+          $scope.latexValue = $scope.latexValue.substr(0, cursorPosition) + object.latex + $scope.latexValue.substr(cursorPosition);
+        } else{
+          $scope.latexValue = $scope.latexValue.substr(0, cursorPosition) + object.latexText + $scope.latexValue.substr(cursorPosition);
+        }
+      }
+      else{
+        if(object.latexCmd) {
+          mathField.cmd(object.latexCmd);
+        } else if(object.latex){
+          mathField.write(object.latex);
+        } else{
+          $scope.latexValue = $scope.latexValue.substr(0, cursorPosition) + object.latexText + $scope.latexValue.substr(cursorPosition);
+        }
       }
     };
 
@@ -653,22 +728,41 @@ angular.module('org.ekstep.mathtext', [])
       return divElement.textContent || divElement.innerText;
     }
 
-    $scope.addToStage = function () {
-      var htmlElement = document.getElementById('latex').innerHTML;
-      var equation = $scope.extractHTML(htmlElement);
+    $scope.getCursorPosition = function(e){
+      $scope.cursorPosition = e.target.selectionStart;
+    }
+
+    $scope.addToStage = function (activeTab) {
+      var equation,advance;
+      if(!$scope.advanceField){
+        var htmlElement = document.getElementById('latex').innerHTML;
+        equation = $scope.extractHTML(htmlElement);
+        advance = false;
+
+      }
+      else {
+        equation = $scope.latexValue;
+        advance = true;
+      }
       if (instance.mode === instance.modes.integration) {
-        instance.callbackFn(equation, instance.textSelected);
+        var mathtextObj = {"latex": equation,
+                           "editMode": instance.textSelected,
+                           "advance" : advance
+                          };
+        instance.callbackFn(mathtextObj);
       } else {
         // Convert the latex or mathquill to equation
         // add it to the stage
         if ($scope.selectedText && $scope.instanceId) {
           ecEditor.dispatchEvent('org.ekstep.mathtext:edit', {
             instanceId: $scope.instanceId,
-            latex: equation
+            latex: equation,
+            advance: advance
           });
         } else {
           ecEditor.dispatchEvent('org.ekstep.mathtext:create', {
             "latex": equation,
+            "advance": advance,
             "type": "rect",
             "x": 10,
             "y": 20,
