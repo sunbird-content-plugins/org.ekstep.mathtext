@@ -173,3 +173,12 @@
   padding: 0;
   font-size: 1.8em;
 }
+
+.latex-field{
+  max-width: 100%;
+  min-width: 100%;
+  padding: 2px 10px;
+  border-radius: 3px;
+  min-height: 35px;
+  border: 1px solid rgb(128, 128, 128);
+}
