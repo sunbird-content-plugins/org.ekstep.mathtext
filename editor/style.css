@@ -175,10 +175,35 @@
 }
 
 .latex-field{
-  max-width: 100%;
-  min-width: 100%;
+  max-width: 90%;
+  min-width: 85%;
   padding: 2px 10px;
   border-radius: 3px;
   min-height: 35px;
   border: 1px solid rgb(128, 128, 128);
+}
+
+.preview{
+  width: 10%;
+  border: 1px solid;
+  padding: 8px 12px;
+  border-radius: 3px;
+  min-height: 35px;
+  border: 1px solid #2e9fd9;
+  color: #2e9fd9;
+  cursor: pointer;
+}
+
+.ui.grid>.column.math-formula{
+  padding-right: 0;
+}
+
+.preview-div{
+  min-height: 35px;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 3px;
+}
+
+.ui.grid>.column.basic-input{
+  padding-right: 10px;
 }
