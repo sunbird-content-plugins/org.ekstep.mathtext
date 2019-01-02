@@ -148,18 +148,24 @@
     <div class="actions math-footer">
       <small ng-if="text_hint">Please switch to advanced tab to copy paste LaTeX</small>
       <div class="ui two column grid">
-        <div class="ui nine wide column math-formula"  ng-show="!advanceField">
+        <div class="ui nine wide column math-formula basic-input"  ng-show="!advanceField">
           <span id="math-field"></span>
           <span id="latex"></span>
         </div>
 
         <div class="ui nine wide column math-formula" ng-show="advanceField">
           <input id="advInput" type="textarea" class="latex-field" ng-model="latexValue" ng-click="getCursorPosition($event)">
+            <span class="preview" ng-click="latexToFormula('latex-preview',latexValue)"><i class="fa fa-eye"></i></span>
         </div>
 
         <div class="ui three wide column right aligned math-add-button-div">
           <button class="ui basic primary button math-add-button" ng-click="addToStage(activeTab)" type="button">Add
           </button>
+        </div>
+
+        <div class="ui twelve wide column"  ng-show="advanceField">
+          <div class="preview-div" id="latex-preview">
+          </div>
         </div>
       </div>
     </div>
